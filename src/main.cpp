@@ -1,6 +1,7 @@
 // #include <SFML/Window.hpp>
 #include "light.hpp"
 #include "vec3.hpp"
+#include "mat4.hpp"
 #include "sphere.hpp"
 #include "ray.hpp"
 #include <iostream>
@@ -23,7 +24,7 @@ int main() {
 
     // Load lights
     for (int i = 0; i<n_lig; i++) {
-        lights.emplace_back(std::make_unique<Light>(Light()));
+        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,0,0))));
     }
 
     //Load objects
@@ -88,6 +89,7 @@ int main() {
                 
             }
         }
+        std::cout << "Frame rendered" << std::endl;
 
         // And now we present everything we draw after the clear.
         SDL_RenderPresent(s);

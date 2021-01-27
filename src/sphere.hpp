@@ -37,7 +37,9 @@ class Sphere : public Object {
             _radius = radius;
         }
 
-        bool intersect(Ray* ray, float* distance, vec3& pHit, vec3& normal, vec3& color) const override;
+        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const override;
+
+        bool intersectShadow(Ray ray, float& distance) const override;
     
 };
 

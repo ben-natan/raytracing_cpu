@@ -80,6 +80,10 @@ class vec3 {
             return _x*otherVec._x + _y*otherVec._y + _z*otherVec._z;
         };
 
+        float norm() {
+            return sqrt(_x*_x + _y*_y + _z*_z);
+        }
+
 
 
 };
