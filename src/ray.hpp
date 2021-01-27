@@ -21,7 +21,7 @@ class Ray {
             float x_camera = (2* ((x + 0.5) / width)- 1) * aspectRatio * tan(fov/2 * M_PI /180); 
             float y_camera = (1 - 2*((y + 0.5) / height)) * tan(fov/2 * M_PI/180);
             _origin = vec3(0,0,0);
-            _direction = vec3(x_camera, y_camera, -1).normalize();
+            _direction = vec3(x_camera, y_camera, -1.0).normalize();
         };
 
         Ray(vec3 origin, vec3 direction, vec3 color): 

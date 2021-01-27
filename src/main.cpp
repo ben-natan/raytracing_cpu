@@ -1,4 +1,5 @@
 // #include <SFML/Window.hpp>
+#include "light.hpp"
 #include "vec3.hpp"
 #include "sphere.hpp"
 #include "ray.hpp"
@@ -15,12 +16,11 @@ int main() {
     int height = 480;
 
     // // Initialiser les objets en XML;
-    // std::vector<std::unique_ptr<Object>> objects[3];
+    std::vector<std::unique_ptr<Object>> objects;
+    std::vector<std::unique_ptr<Light>> lights;
 
-    Sphere objects[1];
-    for (int i = 0; i<1; i++) {
-        objects[i].setCenter(vec3(3,3,-5)); // Problème dans primary ray qui déforme l'image quand on bouge du centre
-        objects[i].setRadius(0.5);
+    for (int i = 0; i<3; i++) {
+        objects.emplace_back(std::make_unique<Sphere>(vec3(i,i,i), 2.0));
     }
 
 
@@ -64,19 +64,19 @@ int main() {
             for (int x = 0; x < height; x++) {
                 // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
                 auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
-                // std::unique_ptr<Object> min_obj;
+                int min_obj_ind;
                 float distance;
                 float min_distance = INFINITY;
                 vec3 pHit, normal, color;
                 vec3 min_pHit, min_normal, min_color;
-                for (int i = 0; i < 1; i++) {
-                    if (objects[i].intersect(primaryRay, &distance, pHit, normal, color)) {
+                for (int i = 0; i < 3; i++) {
+                    if (objects[i]->intersect(primaryRay, &distance, pHit, normal, color)) {
                         if (distance < min_distance) {
                             min_distance = distance;
                             min_pHit = pHit;
                             min_normal = normal;
                             min_color = color;
-                            // min_obj = std::make_unique<Object>(objects[i]);
+                            min_obj_ind = i;
                         }
                     }
                 }
@@ -84,23 +84,21 @@ int main() {
                     // cast shadow ray
                     // color += ambient term
                 if (min_distance != INFINITY ) {
-                    // if (min_obj->isMirror()) {
-                    //     // Shoot un ray
-                    //     auto mirrorRay = std::make_unique<Ray>();
-                    //     primaryRay->addColor(min_obj->k_mirror() * mirrorRay->color());
-                    // }
-                    // if (min_obj->isTransparent()) {
-                    //     // Shoot un ray
-                    //     auto transparentRay = std::make_unique<Ray>();
-                    //     primaryRay->addColor(min_obj->k_transparent() * transparentRay->color());
-                    // }
+                    if (objects[min_obj_ind]->isMirror()) {
+                        auto mirrorRay = std::make_unique<Ray>();
+                        mirrorRay->Shoot();
+                        primaryRay->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
+                    }
+                    if (objects[min_obj_ind]->isTransparent()) {
+                        auto transparentRay = std::make_unique<Ray>();
+                        transparentRay->Shoot();
+                        primaryRay->addColor(objects[min_obj_ind]->k_transparent() * transparentRay->color());
+                    }
                 
                     
-
                     SDL_SetRenderDrawColor(s, 120, 0, 0, 255);
                     SDL_RenderDrawPoint(s, x, y);
                     
-                    primaryRay->Shoot(); // avec phit normal et color
                 } else {
                     SDL_SetRenderDrawColor(s, 0,0,0,0);
                     SDL_RenderDrawPoint(s, x, y);
