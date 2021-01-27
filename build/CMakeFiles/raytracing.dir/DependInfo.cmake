@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/main.cpp.o"
+  "/Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

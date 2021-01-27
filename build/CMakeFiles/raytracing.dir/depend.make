@@ -54,3 +54,5 @@ CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/includ
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/begin_code.h
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/close_code.h
 
+CMakeFiles/raytracing.dir/src/test.cpp.o: ../src/test.cpp
+
