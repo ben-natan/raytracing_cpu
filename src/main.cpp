@@ -13,14 +13,22 @@
 int main() {
     
     int width = 640;
-    int height = 480;
+    int height = 640;
 
     // // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
 
-    for (int i = 0; i<3; i++) {
-        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(i,i,i), 2.0)));
+    int n_obj = 1, n_lig = 1;
+
+    // Load lights
+    for (int i = 0; i<n_lig; i++) {
+        lights.emplace_back(std::make_unique<Light>(Light()));
+    }
+
+    //Load objects
+    for (int i = 0; i<n_obj; i++) {
+        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(1,1,-3), 2.0)));
     }
 
 
@@ -70,40 +78,14 @@ int main() {
                 float min_distance = INFINITY;
                 vec3 pHit, normal, color;
                 vec3 min_pHit, min_normal, min_color;
-                for (int i = 0; i < 3; i++) {
-                    if (objects[i]->intersect(primaryRay, &distance, pHit, normal, color)) {
-                        if (distance < min_distance) {
-                            min_distance = distance;
-                            min_pHit = pHit;
-                            min_normal = normal;
-                            min_color = color;
-                            min_obj_ind = i;
-                        }
-                    }
-                }
-                // for every light:
-                    // cast shadow ray
-                    // color += ambient term
-                if (min_distance != INFINITY ) {
-                    if (objects[min_obj_ind]->isMirror()) {
-                        auto mirrorRay = std::make_unique<Ray>();
-                        mirrorRay->Shoot();
-                        primaryRay->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
-                    }
-                    if (objects[min_obj_ind]->isTransparent()) {
-                        auto transparentRay = std::make_unique<Ray>();
-                        transparentRay->Shoot();
-                        primaryRay->addColor(objects[min_obj_ind]->k_transparent() * transparentRay->color());
-                    }
                 
+                primaryRay->Shoot(objects, lights, n_obj, n_lig);
+                
+                vec3 rgb = primaryRay->color();
+                SDL_SetRenderDrawColor(s, rgb.x(), rgb.y(), rgb.z(), 255);
+                SDL_RenderDrawPoint(s, x, y);
                     
-                    SDL_SetRenderDrawColor(s, 120, 0, 0, 255);
-                    SDL_RenderDrawPoint(s, x, y);
-                    
-                } else {
-                    SDL_SetRenderDrawColor(s, 0,0,0,0);
-                    SDL_RenderDrawPoint(s, x, y);
-                }
+                
             }
         }
 

@@ -4,6 +4,10 @@
 
 #include "vec3.hpp"
 #include "math.hpp"
+#include "object.hpp"
+#include "light.hpp"
+#include <vector>
+#include <memory>
 
 
 
@@ -12,6 +16,7 @@ class Ray {
         vec3 _origin;
         vec3 _direction; // Doit être normalisé!
         vec3 _color;
+        int _depth;
 
     public:
         Ray() : _origin(vec3(0,0,0)), _direction(vec3(0,1,0)), _color(vec3(100,100,100)) {}
@@ -22,6 +27,8 @@ class Ray {
             float y_camera = (1 - 2*((y + 0.5) / height)) * tan(fov/2 * M_PI/180);
             _origin = vec3(0,0,0);
             _direction = vec3(x_camera, y_camera, -1.0).normalize();
+            _depth = 2;
+            _color = vec3(0,0,0);
         };
 
         Ray(vec3 origin, vec3 direction, vec3 color): 
@@ -43,7 +50,8 @@ class Ray {
             _color += color;
         }
 
-        void Shoot() {} // Une fois qu'on a trouvé la plus petite distance
+        void Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::unique_ptr<Light>>& lights,
+                    int n_obj, int n_lig );
 
 };
 

@@ -90,17 +90,62 @@ CMakeFiles/raytracing.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/main.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp -o CMakeFiles/raytracing.dir/src/main.cpp.s
 
+CMakeFiles/raytracing.dir/src/ray.cpp.o: CMakeFiles/raytracing.dir/flags.make
+CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/ray.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/raytracing.dir/src/ray.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/ray.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp
+
+CMakeFiles/raytracing.dir/src/ray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracing.dir/src/ray.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp > CMakeFiles/raytracing.dir/src/ray.cpp.i
+
+CMakeFiles/raytracing.dir/src/ray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/ray.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp -o CMakeFiles/raytracing.dir/src/ray.cpp.s
+
+CMakeFiles/raytracing.dir/src/sphere.cpp.o: CMakeFiles/raytracing.dir/flags.make
+CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/sphere.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/raytracing.dir/src/sphere.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/sphere.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
+
+CMakeFiles/raytracing.dir/src/sphere.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracing.dir/src/sphere.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp > CMakeFiles/raytracing.dir/src/sphere.cpp.i
+
+CMakeFiles/raytracing.dir/src/sphere.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/sphere.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp -o CMakeFiles/raytracing.dir/src/sphere.cpp.s
+
+CMakeFiles/raytracing.dir/src/test.cpp.o: CMakeFiles/raytracing.dir/flags.make
+CMakeFiles/raytracing.dir/src/test.cpp.o: ../src/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/raytracing.dir/src/test.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/test.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp
+
+CMakeFiles/raytracing.dir/src/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracing.dir/src/test.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp > CMakeFiles/raytracing.dir/src/test.cpp.i
+
+CMakeFiles/raytracing.dir/src/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/test.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp -o CMakeFiles/raytracing.dir/src/test.cpp.s
+
 # Object files for target raytracing
 raytracing_OBJECTS = \
-"CMakeFiles/raytracing.dir/src/main.cpp.o"
+"CMakeFiles/raytracing.dir/src/main.cpp.o" \
+"CMakeFiles/raytracing.dir/src/ray.cpp.o" \
+"CMakeFiles/raytracing.dir/src/sphere.cpp.o" \
+"CMakeFiles/raytracing.dir/src/test.cpp.o"
 
 # External object files for target raytracing
 raytracing_EXTERNAL_OBJECTS =
 
 raytracing: CMakeFiles/raytracing.dir/src/main.cpp.o
+raytracing: CMakeFiles/raytracing.dir/src/ray.cpp.o
+raytracing: CMakeFiles/raytracing.dir/src/sphere.cpp.o
+raytracing: CMakeFiles/raytracing.dir/src/test.cpp.o
 raytracing: CMakeFiles/raytracing.dir/build.make
 raytracing: CMakeFiles/raytracing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable raytracing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable raytracing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raytracing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
