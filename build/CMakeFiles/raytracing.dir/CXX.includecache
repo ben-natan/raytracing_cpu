@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
+vec3.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
+
 /Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
@@ -13,6 +19,8 @@ sphere.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 ray.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
+light.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
 iostream
 -
 typeinfo
@@ -49,6 +57,8 @@ ray.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 iostream
