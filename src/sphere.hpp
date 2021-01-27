@@ -6,12 +6,16 @@
 #define SPHERE_H
 
 
-class Sphere : Object {
+class Sphere : public Object {
     private:
         vec3 _center;
         float _radius;
 
     public:
+        ~Sphere() {
+            std::cout << "ra" << std::endl;
+        }
+
         Sphere() : _center(vec3(0,0,0)), _radius(2) {};
         Sphere(vec3 center, float radius) : _center(center), _radius(radius) {};
         Sphere(float radius): _center(vec3(0,0,0)), _radius(radius) {};

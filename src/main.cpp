@@ -20,8 +20,9 @@ int main() {
     std::vector<std::unique_ptr<Light>> lights;
 
     for (int i = 0; i<3; i++) {
-        objects.emplace_back(std::make_unique<Sphere>(vec3(i,i,i), 2.0));
+        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(i,i,i), 2.0)));
     }
+
 
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

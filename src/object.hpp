@@ -7,6 +7,9 @@ class Object {
         float _k_mirror;
         float _k_transparent;
     public: 
+        virtual ~Object() {
+            std::cout << "ho" << std::endl;
+        }
         virtual bool intersect(const std::unique_ptr<Ray>& ray, float* distance, vec3& pHit, vec3& normal, vec3& color) const = 0;
         
         bool isMirror() {

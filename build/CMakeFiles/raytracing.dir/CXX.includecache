@@ -6,7 +6,13 @@
 
 #IncludeRegexTransform: 
 
+/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
+vec3.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
+
 /Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp
+light.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 sphere.hpp
