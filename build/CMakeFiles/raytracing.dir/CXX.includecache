@@ -66,10 +66,6 @@ vector
 memory
 -
 
-/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
-sphere.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
-
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
