@@ -43,17 +43,15 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             this->addColor(objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)normal.dot(L)) * light->color());
         }
 
-        if (objects[min_obj_ind]->isMirror()) {
-            auto mirrorRay = new Ray();   // Ici, bien définir le nouveau ray
-            mirrorRay->Shoot(objects, lights, n_obj, n_obj);
-            this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
-        }
-        if (objects[min_obj_ind]->isTransparent()) {
-            auto transparentRay = new Ray();   // Ici, bien définir le nouveau ray
-            transparentRay->Shoot(objects, lights, n_obj, n_obj);
-            this->addColor(objects[min_obj_ind]->k_transparent() * transparentRay->color());
-        }  
-    } else {
-        return;
+        // if (objects[min_obj_ind]->isMirror()) {
+        //     auto mirrorRay = new Ray();   // Ici, bien définir le nouveau ray
+        //     mirrorRay->Shoot(objects, lights, n_obj, n_obj);
+        //     this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
+        // }
+        // if (objects[min_obj_ind]->isTransparent()) {
+        //     auto transparentRay = new Ray();   // Ici, bien définir le nouveau ray
+        //     transparentRay->Shoot(objects, lights, n_obj, n_obj);
+        //     this->addColor(objects[min_obj_ind]->k_transparent() * transparentRay->color());
+        // }  
     }
 }

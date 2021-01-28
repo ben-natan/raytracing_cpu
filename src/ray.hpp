@@ -33,7 +33,21 @@ class Ray {
 
         Ray(vec3 origin, vec3 direction, vec3 color): 
             _origin(origin.normalize()), _direction(direction.normalize()), _color(color) { } 
+        
+        // Setters ......------------------&
+        void setOrigin(vec3 origin) {
+            _origin = origin;
+        }
 
+        void setDirection(vec3 direction) {
+            _direction = direction;
+        }
+
+        void setColor(vec3 color) {
+            _color = color;
+        }
+
+        // Getters ......------------------&
         vec3 origin() {
             return _origin;
         };

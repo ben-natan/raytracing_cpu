@@ -13,9 +13,9 @@ class Sphere : public Object {
         float _radius;
 
     public:
-        Sphere() : Object(1.0,0.0), _center(vec3(0,0,0)), _radius(2) {};
-        Sphere(vec3 center, float radius) : Object(1.0,0.0), _center(center), _radius(radius) {};
-        Sphere(float radius): Object(1.0,0.0), _center(vec3(0,0,0)), _radius(radius) {};
+        Sphere() : Object(1.0,0.0,0.18), _center(vec3(0,0,0)), _radius(2) {};
+        Sphere(vec3 center, float radius) : Object(1.0,0.0,0.18), _center(center), _radius(radius) {};
+        Sphere(float radius): Object(1.0,0.0,0.18), _center(vec3(0,0,0)), _radius(radius) {};
 
         ~Sphere() {
             std::cout << "Deeee" << std::endl;

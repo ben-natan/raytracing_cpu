@@ -11,6 +11,7 @@
 #include <memory>
 
 
+
 int main() {
     
     int width = 640;
@@ -31,6 +32,8 @@ int main() {
     for (int i = 0; i<n_obj; i++) {
         objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(1,1,-3), 2.0)));
     }
+
+
 
 
 
