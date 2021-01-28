@@ -1,10 +1,10 @@
+#ifndef SPHERE_H
+#define SPHERE_H
+
 #include "vec3.hpp"
 #include "ray.hpp"
 #include "object.hpp"
 #include "iostream"
-
-#ifndef SPHERE_H
-#define SPHERE_H
 
 
 class Sphere : public Object {

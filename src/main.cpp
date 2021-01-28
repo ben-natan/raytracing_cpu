@@ -3,6 +3,7 @@
 #include "vec3.hpp"
 #include "mat4.hpp"
 #include "sphere.hpp"
+#include "plane.hpp"
 #include "ray.hpp"
 #include <iostream>
 #include <typeinfo>
@@ -21,7 +22,7 @@ int main() {
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
 
-    int n_obj = 1, n_lig = 1;
+    int n_obj = 2, n_lig = 1;
 
     // Load lights
     for (int i = 0; i<n_lig; i++) {
@@ -29,12 +30,9 @@ int main() {
     }
 
     //Load objects
-    for (int i = 0; i<n_obj; i++) {
-        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(1,1,-3), 2.0)));
-    }
 
-
-
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(1,1,-3), 2.0)));
+    objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
 
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

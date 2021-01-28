@@ -63,9 +63,9 @@ class Ray {
         void addColor(vec3 color) {
             _color += color;
         }
-
+        
         void Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::unique_ptr<Light>>& lights,
-                    int n_obj, int n_lig );
+                    int n_obj, int n_lig);
 
 };
 

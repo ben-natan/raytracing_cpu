@@ -1,7 +1,6 @@
 #include "ray.hpp"
 
 
-
 void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::unique_ptr<Light>>& lights,
                     int n_obj, int n_lig )
 {

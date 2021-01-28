@@ -7,6 +7,7 @@ CMakeFiles/raytracing.dir/src/main.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/math.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
@@ -56,6 +57,15 @@ CMakeFiles/raytracing.dir/src/main.cpp.o
  /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL_video.h
  /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/begin_code.h
  /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/close_code.h
+CMakeFiles/raytracing.dir/src/plane.cpp.o
+ /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/math.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/plane.cpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp

@@ -16,7 +16,7 @@ class vec3 {
 
         vec3(float gX, float gY, float gZ): _x(gX), _y(gY), _z(gZ) {};
 
-        // Getter ......------------------&
+        // Getters......------------------&
         float x() {
             return _x;
         }
@@ -34,7 +34,7 @@ class vec3 {
             return vec3(_x * otherVec._x, _y * otherVec._y, _z * otherVec._z);
         };
         
-        vec3 operator +(vec3 const otherVec) {
+        vec3 operator +(vec3 otherVec) {
             return vec3(_x+ otherVec._x, _y + otherVec._y, _z+ otherVec._z);
         };
 
