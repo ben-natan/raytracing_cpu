@@ -3,10 +3,9 @@
 #include "vec3.hpp"
 #include "mat4.hpp"
 #include "sphere.hpp"
-#include "plane.hpp"
+// #include "plane.hpp"
 #include "ray.hpp"
 #include <iostream>
-#include <typeinfo>
 #include <vector>
 #include <SDL.h>
 #include <memory>
@@ -15,24 +14,30 @@
 
 int main() {
     
-    int width = 640;
-    int height = 640;
+    int width = 1280;
+    int height = 1280;
 
     // // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
 
-    int n_obj = 2, n_lig = 1;
+    int n_obj = 4, n_lig = 2;
 
     // Load lights
     for (int i = 0; i<n_lig; i++) {
-        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,-1,-1))));
+        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-4,-1,-13))));
+        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
     }
 
     //Load objects
+    
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(2,3,-7), 2.0, vec3(100,100,100))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-0,2,-10), 2.0, vec3(50,150,200))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-7), 1.0, vec3(70,70,140))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-15), 1.0, vec3(70,70,140))));
 
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(1,1,-3), 2.0)));
-    objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
+    
+    // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
 
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

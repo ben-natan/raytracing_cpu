@@ -6,7 +6,6 @@ CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/mat4.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/math.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/object.hpp
-CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/sphere.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/vec3.hpp
@@ -57,14 +56,7 @@ CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/includ
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/begin_code.h
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/close_code.h
 
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/light.hpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/mat4.hpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/math.hpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/object.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/plane.cpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/plane.hpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/ray.hpp
-CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/vec3.hpp
 
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/light.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/mat4.hpp

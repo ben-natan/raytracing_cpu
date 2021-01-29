@@ -29,6 +29,19 @@ class vec3 {
             return _z;
         }
 
+        // Setters......------------------&
+        void setx(float x) {
+            _x = x;
+        }
+
+        void sety(float y) {
+            _y = y;
+        }
+
+        void setz(float z) {
+            _z = z;
+        }
+
         // Operators .. ------------------&
         vec3 operator *(vec3 otherVec) {
             return vec3(_x * otherVec._x, _y * otherVec._y, _z * otherVec._z);

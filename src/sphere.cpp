@@ -38,7 +38,7 @@ bool Sphere::intersectShadow(Ray ray, float& distance) const
         return false;
     }
 
-    if (t0 > 0) {
+    if (t0 > 0.001) { //pour eviter l'acne
         distance = t0;
     } else {
         if (t1 < 0) {
