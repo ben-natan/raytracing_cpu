@@ -24,10 +24,8 @@ int main() {
     int n_obj = 4, n_lig = 2;
 
     // Load lights
-    for (int i = 0; i<n_lig; i++) {
-        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-4,-1,-13))));
-        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
-    }
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-4,-1,-13))));
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
 
     //Load objects
     
