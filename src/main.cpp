@@ -21,18 +21,19 @@ int main() {
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
 
-    int n_obj = 4, n_lig = 2;
+    int n_obj = 4, n_lig = 3;
 
     // Load lights
     lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-4,-1,-13))));
     lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,5,-1))));
 
     //Load objects
     
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(2,3,-7), 2.0, vec3(100,100,100))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-0,2,-10), 2.0, vec3(50,150,200))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-7), 1.0, vec3(70,70,140))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-15), 1.0, vec3(70,70,140))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(2,3,-7), 2.0, vec3(255, 255, 0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-0,2,-10), 2.0, vec3(0,255,0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-7), 1.0, vec3(255,0,0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4,2,-15), 1.0, vec3(26, 140, 255))));
 
     
     // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));

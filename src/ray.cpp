@@ -28,7 +28,7 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
     if (min_distance != INFINITY ) {
 
         // Coloration de l'objet (PHONG)
-        // this->addColor(std::max(0.0f,-min_normal.dot(vec3(this->direction())))* objects[min_obj_ind]->color());
+        this->addColor(std::max(0.0f,-min_normal.dot(vec3(this->direction())))* objects[min_obj_ind]->color());
         // this->multiplyColor(objects[min_obj_ind]->color());
 
 

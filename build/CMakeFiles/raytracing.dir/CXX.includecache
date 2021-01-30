@@ -50,10 +50,6 @@ ray.hpp
 iostream
 -
 
-/Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp
-ray.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
-
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
@@ -67,10 +63,6 @@ vector
 -
 memory
 -
-
-/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
-sphere.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 vec3.hpp
