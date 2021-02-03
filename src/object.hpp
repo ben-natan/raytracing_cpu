@@ -60,7 +60,7 @@ class Object {
             if (k < 0) {
                 return false;
             } else {
-                newDir = eta*incident + (eta*cosi - sqrtf(k))*n;
+                newDir = (eta*incident + (eta*cosi - sqrtf(k))*n).normalize();
                 return true;
             }
         }

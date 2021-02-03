@@ -11,11 +11,13 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
     }
     int min_obj_ind;
     float distance;
+    // int count = 0; // test
     float min_distance = INFINITY;
     vec3 pHit, normal, color;
     vec3 min_pHit, min_normal;
     for (int i = 0; i < n_obj; i++) {
         if (objects[i]->intersect(this, distance, pHit, normal, color)) {
+            // count+=1;
             if (distance < min_distance) {
                     min_distance = distance;
                     min_obj_ind = i;
@@ -26,19 +28,21 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             // std::cout << " ** Distance: " << distance << std::endl;
         }
     }
+    // std::cout << "COUNT " << count << std::endl;
     // std::cout << "##### Min distance: " << min_distance << " pour pHit: " << min_pHit <<std::endl;
-    vec3 bias = 0.001 * min_normal;
-    min_pHit += bias;
+    
     if (min_distance != INFINITY ) {
         // Shadow rays
         for (auto& light: lights) {
-            vec3 L = light->pos() - min_pHit;
+            vec3 bias = 0.001 * min_normal;
+            vec3 shadowOrigin = min_pHit + bias;
+            vec3 L = light->pos() - shadowOrigin;
             float distanceToLight = L.norm();
             float currDist;
             int vis = 1;
             L.normalize();
             for ( auto& object: objects ) {
-                Ray shadowRay(min_pHit, L, this->color());      // Un autre type que les rays serait plus judicieux?
+                Ray shadowRay(shadowOrigin, L, this->color());      // Un autre type que les rays serait plus judicieux?
                 if (object->intersectShadow(shadowRay, currDist)) {
                     if (currDist < distanceToLight) {
                         vis = 0;
@@ -56,20 +60,20 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             vec3 refractionColor = vec3(0,0,0);
             float kr;
             objects[min_obj_ind]->fresnel(this->direction(), min_normal, kr);
-            bool outside = (this->direction().dot(min_normal) > 0 ? true : false);
-            // vec3 bias = 0.0001 * min_normal;
-            // vec3 newOriginRef = outside ? min_pHit + bias : min_pHit - bias;
-            vec3 newOriginRef = min_pHit;
+            bool outside = this->direction().dot(min_normal) < 0;
+            vec3 bias = 0.0001 * min_normal;
+            vec3 newOriginRef = outside ? min_pHit - bias : min_pHit + bias;
             // std::cout << "-> nouvelle origine: " << newOriginRef << std::endl;
-            vec3 newColorRef = this->color(), newDirection;
+            vec3 newColorRef = this->color();
+            vec3 newDirection;
             if (kr < 1) {
                 if (objects[min_obj_ind]->refract(this->direction(), min_normal, newDirection)) {
-                    auto refractionRay = std::make_unique<Ray>(Ray(newOriginRef, this->direction().normalize(), newColorRef, this->depth() -1));
+                    auto refractionRay = std::make_unique<Ray>(Ray(newOriginRef, newDirection, newColorRef, this->depth() -1));
                     refractionRay->Shoot(objects, lights, n_obj, n_lig);
                     refractionColor = refractionRay->color();
                 }
             }
-            vec3 newOrigin = min_pHit;
+            vec3 newOrigin = min_pHit + bias;
             vec3 newColor = this->color();
             this->computeReflectedDirection(min_normal, newDirection);
             auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));
@@ -83,7 +87,8 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
 
         // Réflexion seulement
         else if (objects[min_obj_ind]->isMirror()) {
-            vec3 newOrigin = min_pHit;
+            vec3 bias = 0.001 * min_normal;
+            vec3 newOrigin = min_pHit + bias;
             vec3 newColor = this->color();
             vec3 newDirection;
             this->computeReflectedDirection(min_normal, newDirection);

@@ -14,8 +14,8 @@
 
 int main() {
     
-    int width = 640*2;
-    int height = 640*2;
+    int width = 640;
+    int height = 640;
 
     // // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
@@ -26,15 +26,18 @@ int main() {
     // Load lights
 
     lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,12,-2))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,5,-1))));
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,-5,-1))));
     lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,0,0))));
 
     //Load objects
     
 
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,1,-15), 2.0, vec3(0,0,255))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,2,-6), 2.0, vec3(255, 255, 0))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-1,7,-8), 2.0, vec3(255, 100, 0))));
+    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,0,-15), 2.0, vec3(0,0,255))));
+    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,0,-10), 2.0, vec3(255,0,0))));
+    
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,2,-2.5), 2.0, vec3(255,100,0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,2,-7), 2.0, vec3(255, 255, 30))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-1,5,-11), 2.0, vec3(255, 100, 0))));
     objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(5,5,-10), 2.0, vec3(0, 100, 0))));
     
     // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
@@ -79,18 +82,22 @@ int main() {
         for (int y = 0; y < width; y++) {
             for (int x = 0; x < height; x++) {
                     // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
-                auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
-                int min_obj_ind;
-                float distance;
-                float min_distance = INFINITY;
-                vec3 pHit, normal, color;
-                vec3 min_pHit, min_normal, min_color;
+                    // if (x ==  288 && y ==  267) {
+                    auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
+                    int min_obj_ind;
+                    float distance;
+                    float min_distance = INFINITY;
+                    vec3 pHit, normal, color;
+                    vec3 min_pHit, min_normal, min_color;
+                    
+                    primaryRay->Shoot(objects, lights, n_obj, n_lig);
+                    
+                    vec3 rgb = primaryRay->color();
+                    SDL_SetRenderDrawColor(s, rgb.x(), rgb.y(), rgb.z(), 255);
+                    SDL_RenderDrawPoint(s, x, y);
+                    // }
+                    
                 
-                primaryRay->Shoot(objects, lights, n_obj, n_lig);
-                
-                vec3 rgb = primaryRay->color();
-                SDL_SetRenderDrawColor(s, rgb.x(), rgb.y(), rgb.z(), 255);
-                SDL_RenderDrawPoint(s, x, y);
                 
             }
         }
