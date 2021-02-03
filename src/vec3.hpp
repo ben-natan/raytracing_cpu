@@ -55,6 +55,11 @@ class vec3 {
             return vec3(_x- otherVec._x, _y - otherVec._y, _z - otherVec._z);
         };
 
+        vec3 operator-() {
+            return vec3(-_x, -_y, -_z);
+        }
+        
+
         vec3 operator *=(vec3 otherVec) {
             _x*=otherVec._x;
             _y*=otherVec._y;

@@ -19,9 +19,9 @@ class Ray {
         int _depth;
 
     public:
-        Ray() : _origin(vec3(0,0,0)), _direction(vec3(0,1,0)), _color(vec3(255,255,255)), _depth(2) {}
+        Ray() : _origin(vec3(0,0,0)), _direction(vec3(0,1,0)), _color(vec3(255,255,255)), _depth(4) {}
 
-        Ray(int x, int y, int width, int height, float fov, int depth = 2) { //Primary ray
+        Ray(int x, int y, int width, int height, float fov, int depth = 4) { //Primary ray
             float aspectRatio = width / (float)height; // Si width > height
             float x_camera = (2* ((x + 0.5) / width)- 1) * aspectRatio * tan(fov/2 * M_PI /180); 
             float y_camera = (1 - 2*((y + 0.5) / height)) * tan(fov/2 * M_PI/180);
@@ -31,8 +31,8 @@ class Ray {
             _color = vec3(0,0,0);
         };
 
-        Ray(vec3 origin, vec3 direction, vec3 color, int depth = 2): 
-            _origin(origin.normalize()), _direction(direction.normalize()), _color(color), _depth(depth) { } 
+        Ray(vec3 origin, vec3 direction, vec3 color, int depth = 3): 
+            _origin(origin), _direction(direction.normalize()), _color(color), _depth(depth) { } 
         
         // Setters ......------------------&
         void setOrigin(vec3 origin) {

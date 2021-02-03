@@ -13,7 +13,7 @@ bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3
         return false;
     }
     // Ici on a au moins une intersection et t1 >= t0
-    if (t0 > 0) {
+    if (t0 > 0.001) {
         distance = t0;
     } else {
         if (t1 < 0) {
@@ -22,6 +22,8 @@ bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3
         }
         distance = t1;
     }
+    // std::cout << "                &dans intersect:" << 
+    // "Ray Origin: " << ray->origin() << " Distance: " << distance << std::endl;
     pHit = ray->origin() + distance * ray->direction();
     normal = (pHit - _center).normalize();
     return true;
