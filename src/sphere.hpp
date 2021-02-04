@@ -16,7 +16,7 @@ class Sphere : public Object {
         Sphere() : Object(0.80,0.20,0.50), _center(vec3(0,0,0)), _radius(2) {};
         Sphere(vec3 center, float radius) : Object(0.80,0.20,0.50), _center(center), _radius(radius) {};
         Sphere(float radius): Object(0.80,0.20,0.50), _center(vec3(0,0,0)), _radius(radius) {};
-        Sphere(vec3 center, float radius, vec3 color): Object(0.8, 0.2, 0.50, 10, 1.5, color), _center(center), _radius(radius) {};
+        Sphere(vec3 center, float radius, vec3 color): Object(1.0, 0.0, 0.50, 10, 1.5, color), _center(center), _radius(radius) {};
         Sphere(vec3 center, float radius, vec3 color, float k_transparent): Object(1.0 - k_transparent, k_transparent, 0.50, 3, 1.5, color), _center(center), _radius(radius) {};
         Sphere(vec3 center, float radius, int spec_n, float ior, vec3 color): Object(0.80, 0.20, 0.50, spec_n, ior, color), _center(center), _radius(radius) {};
 
