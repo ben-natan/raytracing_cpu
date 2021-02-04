@@ -3,13 +3,12 @@
 #include "vec3.hpp"
 #include "mat4.hpp"
 #include "sphere.hpp"
-// #include "plane.hpp"
+#include "plane.hpp"
 #include "ray.hpp"
 #include <iostream>
 #include <vector>
 #include <SDL.h>
 #include <memory>
-
 
 
 int main() {
@@ -20,25 +19,28 @@ int main() {
     // // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
-
-    int n_obj = 4, n_lig = 3;
+    
+    int n_obj = 4, n_lig = 2;
 
     // Load lights
 
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,12,-2))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,-5,-1))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,0,0))));
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
+    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,5,-2))));
+    // lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,-5,-1))));
+    // lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,0,0))));
 
     //Load objects
     
+    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,-1.5,-3), 1.5, vec3(255,100,0))));
+    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,0,-7), 2.0, vec3(0,100,255))));
+    // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(0,0,0),vec3(0,1,0))));
 
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,0,-15), 2.0, vec3(0,0,255))));
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,0,-10), 2.0, vec3(255,0,0))));
+
     
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,2,-2.5), 2.0, vec3(255,100,0))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,2,-7), 2.0, vec3(255, 255, 30))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-1,5,-11), 2.0, vec3(255, 100, 0))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(5,5,-10), 2.0, vec3(0, 100, 0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,-1,-4.5), 2.0, vec3(255,100,0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(5,0,-6), 2.0, vec3(255, 255, 0))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-3,3,-11), 2.0, vec3(0, 0, 255))));
+    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(3,3,-10), 2.0, vec3(0, 100, 0))));
     
     // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
 
@@ -82,7 +84,7 @@ int main() {
         for (int y = 0; y < width; y++) {
             for (int x = 0; x < height; x++) {
                     // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
-                    // if (x ==  288 && y ==  267) {
+                    // if (x ==  height/2 && y ==  width /2 ) {
                     auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
                     int min_obj_ind;
                     float distance;

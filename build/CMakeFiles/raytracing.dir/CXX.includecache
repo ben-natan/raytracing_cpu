@@ -21,6 +21,8 @@ mat4.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
 sphere.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+plane.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
 ray.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 iostream
@@ -52,6 +54,20 @@ iostream
 algorithm
 -
 
+/Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
+iostream
+-
+cmath
+-
+object.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+vec3.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
+
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
@@ -65,6 +81,12 @@ vector
 -
 memory
 -
+cmath
+-
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
+sphere.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 vec3.hpp
