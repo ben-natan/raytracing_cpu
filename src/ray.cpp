@@ -36,7 +36,6 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
     // std::cout << "COUNT " << count << std::endl;
     std::cout << "##### Min distance: " << min_distance << " pour pHit: " << min_pHit <<std::endl;
     #endif
-    bool outside = this->direction().dot(min_normal) < 0;
     if (min_distance != INFINITY ) {
         // Ambient Lighting
         float ambientLevel = 0.05;
@@ -77,9 +76,11 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             vec3 refractionColor = vec3(0,0,0);
             float kr;
             objects[min_obj_ind]->fresnel(this->direction(), min_normal, kr);
+            bool outside = this->direction().dot(min_normal) < 0;
             vec3 bias = 0.0001 * min_normal;
             vec3 newOriginRef = outside ? min_pHit - bias : min_pHit + bias;
-            vec3 newColorRef = this->color();
+            // vec3 newColorRef = this->color();
+            vec3 newColorRef = vec3(0,0,0);
             vec3 newDirectionRef;
             if (kr < 1) {
                 if (objects[min_obj_ind]->refract(this->direction(), min_normal, newDirectionRef)) {
@@ -89,7 +90,8 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
                 }
             }
             vec3 newOrigin = outside ? min_pHit + bias : min_pHit - bias;
-            vec3 newColor = this->color();
+            // vec3 newColor = this->color();
+            vec3 newColor = vec3(0,0,0);
             vec3 newDirection;
             this->computeReflectedDirection(min_normal, newDirection);
             auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));

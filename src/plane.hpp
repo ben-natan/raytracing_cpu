@@ -16,6 +16,7 @@ class Plane: public Object {
         Plane(): Object(1.0,0.0,0.18), _position(vec3(0,-1,0)), _normal(vec3(0,1,0)) {};
         Plane(vec3 pos): Object(1.0,0.0,0.18), _position(pos), _normal(vec3(0,1,0)) {};
         Plane(vec3 pos, vec3 nor): Object(1.0,0.0,0.18), _position(pos), _normal(nor.normalize()) {};
+        Plane(vec3 pos, vec3 nor, vec3 color): Object(1.0,0.0,0.18), _position(pos), _normal(nor.normalize()) {};
 
         ~Plane() {
             std::cout << "Plane" << std::endl;

@@ -24,6 +24,7 @@ class Object {
         }
         Object(): _k_mirror(1.0), _k_transparent(0.0), _albedo(0.18), _spec_n(3), _ior(1.5), _color(vec3(255,255,255)), _Ks(0.1) {} // albedo 0.18
         Object(float k_mir, float k_trans, float albedo = 0.18, int spec_n = 3, float ior = 1.5, vec3 color = vec3(255,255,255), float Ks = 0.1): _k_mirror(k_mir), _k_transparent(k_trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
+        Object(float k_mir, float k_trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.1): _k_mirror(k_mir), _k_transparent(k_trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
 
         virtual bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const = 0;
         virtual bool intersectShadow(Ray ray, float& distance) const = 0;
