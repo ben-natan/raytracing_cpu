@@ -5,7 +5,7 @@ project(Raytracing)
 find_package(SDL2 REQUIRED)
 
 
-# add_subdirectory(external)
+add_subdirectory(external)
 
 file(GLOB_RECURSE RAYTRACING_FILES
     src/*)

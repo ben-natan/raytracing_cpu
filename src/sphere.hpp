@@ -21,7 +21,7 @@ class Sphere : public Object {
         Sphere(vec3 center, float radius, int spec_n, float ior, vec3 color): Object(0.80, 0.20, 0.50, spec_n, ior, color), _center(center), _radius(radius) {};
 
         ~Sphere() {
-            std::cout << "Deeee" << std::endl;
+            
         }
 
         vec3 center() {

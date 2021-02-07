@@ -116,7 +116,9 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
         }//(reflexion)
     } else {
-        this->addColor(0.1 * vec3(204, 242, 255)); // Background color?
+        auto t = 0.5*this->direction().y() + 1.0;
+        // this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color?
+        this->addColor(vec3(0,0,0)); // Background color?
     }
 }
 

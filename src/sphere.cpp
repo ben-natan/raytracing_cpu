@@ -9,7 +9,7 @@ bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3
     vec3 L = ray->origin() - _center;
     float b = 2*ray->direction().dot(L);
     float c = L.dot(L) - _radius * _radius;  // PERF: stocker radius au carré
-    if (!math::solveQuadratic(a,b,c, t0, t1)) {
+    if (!Tools::solveQuadratic(a,b,c, t0, t1)) {
         return false;
     }
     // Ici on a au moins une intersection et t1 >= t0
@@ -36,7 +36,7 @@ bool Sphere::intersectShadow(Ray ray, float& distance) const
     vec3 L = ray.origin() - _center;
     float b = 2*ray.direction().dot(L);
     float c = L.dot(L) - _radius * _radius;
-    if (!math::solveQuadratic(a,b,c,t0,t1)) {
+    if (!Tools::solveQuadratic(a,b,c,t0,t1)) {
         return false;
     }
 

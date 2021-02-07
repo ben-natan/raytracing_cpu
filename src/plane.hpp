@@ -19,7 +19,7 @@ class Plane: public Object {
         Plane(vec3 pos, vec3 nor, vec3 color): Object(1.0,0.0,0.18), _position(pos), _normal(nor.normalize()) {};
 
         ~Plane() {
-            std::cout << "Plane" << std::endl;
+            
         }
 
         bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const override;

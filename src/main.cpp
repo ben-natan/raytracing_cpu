@@ -5,13 +5,24 @@
 #include "sphere.hpp"
 #include "plane.hpp"
 #include "ray.hpp"
+#include "tools.hpp"
 #include <iostream>
 #include <vector>
 #include <SDL.h>
 #include <thread>
 #include <memory>
+#include <fstream>
+#include <rapidxml.hpp>
+#include <stdlib.h>
+
+
+
 
 #define pano false
+
+
+// using namespace rapidxml;
+
 
 int main() {
     
@@ -24,38 +35,74 @@ int main() {
     #endif
 
     // // Initialiser les objets en XML;
+
+    std::cout << "Loading world.." << std::endl;
+    std::cout << std::endl;
+
+
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
     
-    int n_obj = 5, n_lig = 4;
+    int n_obj = 0, n_lig = 0;
+
+    // Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
+
+    rapidxml::xml_document<> doc;
+    rapidxml::xml_node<> * root_node;
+
+    std::ifstream theFile("../data/spheres.xml");
+    std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
+    buffer.push_back('\0');
+            
+    doc.parse<0>(&buffer[0]);
+
+    root_node = doc.first_node("World");
+    rapidxml::xml_node<> * objects_root = root_node->first_node("Objects");
+    rapidxml::xml_node<> * lights_root = root_node->first_node("Lights");
+
+
+    // Load objects
+    rapidxml::xml_node<> * spheres_root = objects_root->first_node("Spheres");
+    for (rapidxml::xml_node<> * sphere = spheres_root->first_node("Sphere"); sphere; sphere = sphere->next_sibling()) {
+        std::cout << "Loading sphere" << " " << n_obj << ".." << std::endl;
+        float cx, cy, cz, r;
+        cx = atof(sphere->first_attribute("cx")->value());
+        cy = atof(sphere->first_attribute("cy")->value());
+        cz = atof(sphere->first_attribute("cz")->value());
+        r = atof(sphere->first_attribute("r")->value());
+        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(123,20,50))));
+        n_obj++;
+    }
+
+    rapidxml::xml_node<> * planes_root = objects_root->first_node("Planes");
+    for (rapidxml::xml_node<> * plane = planes_root->first_node("Plane"); plane; plane = plane->next_sibling()) {
+        std::cout << "Loading plane" << " " << n_obj << ".." << std::endl;
+        float px, py, pz;
+        float nx, ny, nz;
+        px = atof(plane->first_attribute("px")->value());
+        py = atof(plane->first_attribute("py")->value());
+        pz = atof(plane->first_attribute("pz")->value());
+        nx = atof(plane->first_attribute("nx")->value());
+        ny = atof(plane->first_attribute("ny")->value());
+        nz = atof(plane->first_attribute("nz")->value());
+        objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(50,0,50))));
+        n_obj++;
+    }
 
     // Load lights
-
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-5,3.5,-6))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-5,3.5,-6))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,-3.5,6))));
-    lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,-3.5,6))));
-    // lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(-1,-5,-1))));
-    // lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(0,0,0))));
-
-    //Load objects
-    
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(0,-1.5,-3), 1.5, vec3(255,100,0))));
-
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(4.5,4,-12), 5.0f, vec3(123,20,50))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-3.5,2,-10), 0.5f, vec3(0,0,0), 0.0))); 
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-4.5,1,-14), 2.0f, vec3(255,0,0))));
-    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-0.5,0.5,-3), 1.0f, vec3(0,0,255))));
-    objects.emplace_back(std::make_unique<Plane>(Plane(vec3(0,-3.0f,-17),vec3(0,1,0), vec3(50,0,50))));
-
-
-    
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-2,-1,-4.5), 2.0, vec3(255,100,0), 0.2)));
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(5,0,-6), 2.0, vec3(255, 255, 0), 0.2)));
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(-3,3,-11), 2.0, vec3(0, 0, 255), 0.2)));
-    // objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(3,3,-10), 2.0, vec3(0, 100, 0), 0.2)));
-    
-    // objects.emplace_back(std::make_unique<Plane>(Plane(vec3(-1,-8,0), vec3(0,1,0))));
+    rapidxml::xml_node<> * pLights_root = lights_root->first_node("PointLights");
+    for (rapidxml::xml_node<> * light = pLights_root->first_node("PointLight"); light; light = light->next_sibling()) {
+        std::cout << "Loading pointLight" << " " << n_lig << ".." << std::endl;
+        float px, py, pz;
+        px = atof(light->first_attribute("px")->value());
+        py = atof(light->first_attribute("py")->value());
+        pz = atof(light->first_attribute("pz")->value());
+        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(px,py,pz))));
+        n_lig++;
+    }
+    std::cout << std::endl;
+    std::cout << "Successfully loaded " << n_obj << " objects and " << n_lig << " lights." << std::endl;
+    std::cout << std::endl;
 
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -79,6 +126,7 @@ int main() {
     SDL_Event event;
 
     std::vector<vec3> framebuffer = std::vector<vec3>(width*height); 
+    int frame = -1;
 
     while (!quit) {
         //drawing particles
@@ -104,11 +152,10 @@ int main() {
                         float min_distance = INFINITY;
                         vec3 pHit, normal, color;
                         vec3 min_pHit, min_normal, min_color;
-                        
                         primaryRay->Shoot(objects, lights, n_obj, n_lig);
                         
                         vec3 rgb = primaryRay->color();
-                        framebuffer[y + x * width] = rgb; 
+                        framebuffer[y + x * width] = rgb.gammaCorrect(); 
                 }
             }
         });
@@ -125,8 +172,11 @@ int main() {
                     SDL_RenderDrawPoint(s, x, y);
                 }
             }
-
-            std::cout << "Frame rendered" << std::endl;
+            frame+= 1;
+            if (frame != 0) {
+                std::cout << " -- Frame " << frame << std::endl;
+            }
+            
 
             // And now we present everything we draw after the clear.
             SDL_RenderPresent(s);
@@ -134,6 +184,8 @@ int main() {
 
         calc_thread.join();
         render_thread.join();
+        
+        
         
     }
 

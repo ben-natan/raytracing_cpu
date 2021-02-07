@@ -2,7 +2,7 @@
 #define RAY_H
 
 #include "vec3.hpp"
-#include "math.hpp"
+#include "tools.hpp"
 #include "object.hpp"
 #include "light.hpp"
 #include <vector>

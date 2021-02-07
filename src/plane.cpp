@@ -8,7 +8,7 @@ bool Plane::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3&
         distance = (1/(float)denominator) *diff.dot(_normal);
         pHit = ray->origin() + distance*ray->direction();
         normal = _normal;
-        if ((pHit - _position).dot(pHit - _position) < 170) { // Disk
+        if ((pHit - _position).dot(pHit - _position) < 400) { // Disk
             return (distance >= 0); 
         }
     }
@@ -21,7 +21,7 @@ bool Plane::intersectShadow(Ray ray, float& distance) const {
         vec3 diff = -(ray.origin() - _position); // Régler le problème de const
         distance = (1/(float)denominator) * diff.dot(_normal);
         vec3 pHit = ray.origin() + distance * ray.direction();
-        if ((pHit - _position).dot(pHit - _position) < 170)
+        if ((pHit - _position).dot(pHit - _position) < 400)
             return (distance >= 0);
     }
     return false;

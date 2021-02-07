@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+../include/rapidxml.hpp
+cstdlib
+-
+cassert
+-
+new
+-
+exception
+-
+
 /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
 mat4.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
@@ -25,6 +35,8 @@ plane.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
 ray.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
+tools.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
 iostream
 -
 vector
@@ -35,15 +47,15 @@ thread
 -
 memory
 -
+fstream
+-
+rapidxml.hpp
+-
+stdlib.h
+-
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
 vector
--
-
-/Users/bennatanadrien/projects/raytracing_cpu/src/math.hpp
-math.h
--
-algorithm
 -
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
@@ -69,8 +81,8 @@ vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-math.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/math.hpp
+tools.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
 light.hpp
@@ -91,6 +103,12 @@ object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
 iostream
 /Users/bennatanadrien/projects/raytracing_cpu/src/iostream
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
+math.h
+-
+algorithm
+-
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 iostream

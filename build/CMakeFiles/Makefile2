@@ -74,18 +74,38 @@ CMAKE_BINARY_DIR = /Users/bennatanadrien/projects/raytracing_cpu/build
 
 # The main recursive "all" target.
 all: CMakeFiles/raytracing.dir/all
+all: external/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: external/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/raytracing.dir/clean
+clean: external/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory external
+
+# Recursive "all" directory target.
+external/all:
+
+.PHONY : external/all
+
+# Recursive "preinstall" directory target.
+external/preinstall:
+
+.PHONY : external/preinstall
+
+# Recursive "clean" directory target.
+external/clean:
+
+.PHONY : external/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/raytracing.dir

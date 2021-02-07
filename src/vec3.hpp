@@ -102,8 +102,8 @@ class vec3 {
             return sqrt(_x*_x + _y*_y + _z*_z);
         }
 
-        vec3 srqt() {
-            return vec3(sqrt(_x), sqrt(_y), sqrt(_y));
+        vec3 gammaCorrect() {
+            return vec3(256 * sqrt(_x/256), 256 * sqrt(_y/256), 256 * sqrt(_z/256));
         }
 
 

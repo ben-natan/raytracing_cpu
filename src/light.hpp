@@ -16,7 +16,7 @@ class Light {
         Light(const mat4 &l2w): _lightToWorld(l2w) {} 
 
         virtual ~Light() {
-            std::cout << "Light" << std::endl;
+            
         }
 
         float intensity() {
