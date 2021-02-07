@@ -102,6 +102,10 @@ class vec3 {
             return sqrt(_x*_x + _y*_y + _z*_z);
         }
 
+        vec3 srqt() {
+            return vec3(sqrt(_x), sqrt(_y), sqrt(_y));
+        }
+
 
 
 };
