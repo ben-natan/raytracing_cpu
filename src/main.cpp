@@ -148,8 +148,11 @@ int main() {
                     // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
                     // if (x ==  height/2 && y ==  width /2 ) {
                     vec3 rgb;
+                    double y_offset, x_offset;
                     for (int s=0; s < antiAliasingSample; s++) {
-                        auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
+                        y_offset = Tools::random_double();
+                        x_offset = Tools::random_double();
+                        auto primaryRay = std::make_unique<Ray>(x + x_offset , y + y_offset, width, height, 90);   // fov en degrés
                         primaryRay->Shoot(objects, lights, n_obj, n_lig);
                         rgb += primaryRay->color();
                     }

@@ -109,6 +109,8 @@ math.h
 -
 algorithm
 -
+random
+-
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 iostream
