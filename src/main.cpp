@@ -28,6 +28,7 @@ int main() {
     
     int width = 640;
     int height = 640;
+    int antiAliasingSample = 10;
 
     #if pano
     width*=2;
@@ -144,18 +145,16 @@ int main() {
         std::thread calc_thread([&] () {
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
-                        // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
-                        // if (x ==  height/2 && y ==  width /2 ) {
+                    // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
+                    // if (x ==  height/2 && y ==  width /2 ) {
+                    vec3 rgb;
+                    for (int s=0; s < antiAliasingSample; s++) {
                         auto primaryRay = std::make_unique<Ray>(x,y,width,height,90);   // fov en degrés
-                        int min_obj_ind;
-                        float distance;
-                        float min_distance = INFINITY;
-                        vec3 pHit, normal, color;
-                        vec3 min_pHit, min_normal, min_color;
                         primaryRay->Shoot(objects, lights, n_obj, n_lig);
-                        
-                        vec3 rgb = primaryRay->color();
-                        framebuffer[y + x * width] = rgb.gammaCorrect(); 
+                        rgb += primaryRay->color();
+                    }
+                    rgb = 1.0/antiAliasingSample * rgb;
+                    framebuffer[y + x * width] = rgb.gammaCorrect(); 
                 }
             }
         });
