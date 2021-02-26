@@ -15,16 +15,18 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
     float distance;
     int count = 0; // test
     float min_distance = INFINITY;
-    vec3 pHit, normal, color;
-    vec3 min_pHit, min_normal;
+    vec3 pHit, normal, hitTextureCoords;
+    vec3 min_pHit, min_normal, min_hitTextureCoords;
     for (int i = 0; i < n_obj; i++) {
-        if (objects[i]->intersect(this, distance, pHit, normal, color)) {
+        distance = INFINITY;
+        if (objects[i]->intersect(this, distance, pHit, normal, hitTextureCoords)) {
             count+=1;
             if (distance < min_distance) {
                     min_distance = distance;
                     min_obj_ind = i;
                     min_pHit = pHit;
                     min_normal = normal;
+                    min_hitTextureCoords = hitTextureCoords;
             }
             #if debug
             std::cout << " ** Intersecté: " << objects[i]->color() << "en " << pHit<< std::endl;
@@ -62,7 +64,7 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
 
             // Lambertian 
             // this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * light->color());                // scratchapixel.com & http://graphics.stanford.edu/courses/cs148-10-summer/as3/instructions/as3.pdf
-            this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * objects[min_obj_ind]->color());
+            this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * objects[min_obj_ind]->colorFromTexture(min_hitTextureCoords));
 
             // Specular
             vec3 R;
@@ -117,11 +119,12 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
         }//(reflexion)
     } else {
         
-        if (_depth == 4) {
+        if (_depth == 2) {
             auto t = 0.5*this->direction().y() + 1.0;
             this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color?
         } else {
             this->addColor(vec3(0,0,0)); // Background color?
+            // std::cout << "rien touché à depth " << _depth << std::endl; 
         }
         
     }

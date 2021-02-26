@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 
 
-bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const
+bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const
 {
 // a = 1 , b = 2D(O-C) c = |O-C|^2 - R^2
     float t0, t1;
@@ -22,10 +22,9 @@ bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3
         }
         distance = t1;
     }
-    // std::cout << "                &dans intersect:" << 
-    // "Ray Origin: " << ray->origin() << " Distance: " << distance << std::endl;
     pHit = ray->origin() + distance * ray->direction();
     normal = (pHit - _center).normalize();
+    // hitTextureCoords à définir
     return true;
 }
 

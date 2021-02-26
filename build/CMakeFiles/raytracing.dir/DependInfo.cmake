@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/ray.cpp.o"
   "/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/sphere.cpp.o"
   "/Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/test.cpp.o"
+  "/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/triangle.cpp.o"
+  "/Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.cpp" "/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

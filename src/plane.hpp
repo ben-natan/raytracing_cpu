@@ -22,9 +22,9 @@ class Plane: public Object {
             
         }
 
-        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const override;
-
+        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
         bool intersectShadow(Ray ray, float& distance) const override;
+
 };
 
 

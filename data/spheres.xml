@@ -2,7 +2,7 @@
 <World>
     <Objects>
         <Spheres>
-            <Sphere cx="0" cy="0" cz="-1" r="0.5"/>
+            <Sphere cx="-0.8" cy="0" cz="-1" r="0.5"/>
             <Sphere cx="3" cy="3" cz="-1" r="0.5"/>
             <Sphere cx="0" cy="-100.5" cz="-1" r="100" />
         </Spheres>
@@ -12,7 +12,7 @@
     </Objects>
     <Lights>
         <PointLights>
-            <PointLight px="0" py="3" pz="-1"/>
+            <PointLight px="0" py="3" pz="-5"/>
         </PointLights>
     </Lights>
 </World>

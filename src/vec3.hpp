@@ -51,11 +51,11 @@ class vec3 {
             return vec3(_x+ otherVec._x, _y + otherVec._y, _z+ otherVec._z);
         };
 
-        vec3 operator -(vec3 otherVec) {
+        vec3 operator -(const vec3& otherVec) {
             return vec3(_x- otherVec._x, _y - otherVec._y, _z - otherVec._z);
         };
 
-        vec3 operator-() {
+        vec3 operator -() {
             return vec3(-_x, -_y, -_z);
         }
         
@@ -97,6 +97,10 @@ class vec3 {
         float dot(vec3 otherVec) {
             return _x*otherVec._x + _y*otherVec._y + _z*otherVec._z;
         };
+
+        vec3 crossProduct(vec3 otherVec) {
+            return vec3(_y * otherVec._z  - _z * otherVec._y, _z*otherVec._x - _x*otherVec._z, _x*otherVec._y - _y*otherVec._x);
+        }
 
         float norm() {
             return sqrt(_x*_x + _y*_y + _z*_z);

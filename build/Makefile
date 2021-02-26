@@ -278,6 +278,60 @@ src/test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/test.cpp.s
 .PHONY : src/test.cpp.s
 
+src/triangle.o: src/triangle.cpp.o
+
+.PHONY : src/triangle.o
+
+# target to build an object file
+src/triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/triangle.cpp.o
+.PHONY : src/triangle.cpp.o
+
+src/triangle.i: src/triangle.cpp.i
+
+.PHONY : src/triangle.i
+
+# target to preprocess a source file
+src/triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/triangle.cpp.i
+.PHONY : src/triangle.cpp.i
+
+src/triangle.s: src/triangle.cpp.s
+
+.PHONY : src/triangle.s
+
+# target to generate assembly for a file
+src/triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/triangle.cpp.s
+.PHONY : src/triangle.cpp.s
+
+src/trianglemesh.o: src/trianglemesh.cpp.o
+
+.PHONY : src/trianglemesh.o
+
+# target to build an object file
+src/trianglemesh.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o
+.PHONY : src/trianglemesh.cpp.o
+
+src/trianglemesh.i: src/trianglemesh.cpp.i
+
+.PHONY : src/trianglemesh.i
+
+# target to preprocess a source file
+src/trianglemesh.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/trianglemesh.cpp.i
+.PHONY : src/trianglemesh.cpp.i
+
+src/trianglemesh.s: src/trianglemesh.cpp.s
+
+.PHONY : src/trianglemesh.s
+
+# target to generate assembly for a file
+src/trianglemesh.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/trianglemesh.cpp.s
+.PHONY : src/trianglemesh.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -302,6 +356,12 @@ help:
 	@echo "... src/test.o"
 	@echo "... src/test.i"
 	@echo "... src/test.s"
+	@echo "... src/triangle.o"
+	@echo "... src/triangle.i"
+	@echo "... src/triangle.s"
+	@echo "... src/trianglemesh.o"
+	@echo "... src/trianglemesh.i"
+	@echo "... src/trianglemesh.s"
 .PHONY : help
 
 

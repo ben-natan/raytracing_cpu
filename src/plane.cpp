@@ -1,6 +1,6 @@
 #include "plane.hpp"
 
-bool Plane::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& color) const
+bool Plane::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const
 {
     float denominator = (ray->direction()).dot(_normal);
     if (abs(denominator) > 0.0001) {
@@ -8,6 +8,7 @@ bool Plane::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3&
         distance = (1/(float)denominator) *diff.dot(_normal);
         pHit = ray->origin() + distance*ray->direction();
         normal = _normal;
+        // hitTextureCoords à déterminer
         if ((pHit - _position).dot(pHit - _position) < 400) { // Disk
             return (distance >= 0); 
         }

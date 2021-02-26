@@ -6,6 +6,9 @@
 #include "plane.hpp"
 #include "ray.hpp"
 #include "tools.hpp"
+#include "mesh.hpp"
+#include "trianglemesh.hpp"
+#include "triangle.hpp"
 #include <iostream>
 #include <vector>
 #include <SDL.h>
@@ -25,10 +28,10 @@
 
 
 int main() {
-    
+
     int width = 640;
     int height = 640;
-    int antiAliasingSample = 10;
+    int antiAliasingSample = 1;
 
     #if pano
     width*=2;
@@ -48,6 +51,7 @@ int main() {
 
     // Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
 
+    
     rapidxml::xml_document<> doc;
     rapidxml::xml_node<> * root_node;
 
@@ -61,7 +65,7 @@ int main() {
     rapidxml::xml_node<> * objects_root = root_node->first_node("Objects");
     rapidxml::xml_node<> * lights_root = root_node->first_node("Lights");
 
-
+    
     // Load objects
     rapidxml::xml_node<> * spheres_root = objects_root->first_node("Spheres");
     for (rapidxml::xml_node<> * sphere = spheres_root->first_node("Sphere"); sphere; sphere = sphere->next_sibling()) {
@@ -89,6 +93,49 @@ int main() {
         objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(50,0,50))));
         n_obj++;
     }
+
+    // PolygonMesh poly_mesh = PolygonMesh();
+    // poly_mesh.loadGeoFile("../data/cow.geo");
+    // objects.emplace_back(std::make_unique<TriangleMesh>(poly_mesh.nfaces(), poly_mesh.faceIndex(), poly_mesh.vertsIndex(), poly_mesh.verts()));
+    
+    std::vector<int> faceIndex(4);
+    faceIndex[0] = 3;
+    faceIndex[1] = 3;
+    faceIndex[2] = 3;
+    faceIndex[3] = 3;
+    std::vector<int> vertsIndex(12);
+    vertsIndex[0] = 0;
+    vertsIndex[1] = 1;
+    vertsIndex[2] = 2;
+    vertsIndex[3] = 0;
+    vertsIndex[4] = 2;
+    vertsIndex[5] = 3;
+    vertsIndex[6] = 2;
+    vertsIndex[7] = 1;
+    vertsIndex[8] = 3;
+    vertsIndex[9] = 1;
+    vertsIndex[10] = 0;
+    vertsIndex[11] = 3;
+    std::vector<vec3> st(12);
+    st[0] = vec3(0.45,0.4,0);
+    st[1] = vec3(0.7,0.5,0);
+    st[2] = vec3(0.4,0.6,0);
+    st[3] = vec3(0.45,0.4,0);
+    st[4] = vec3(0.4,0.6,0);
+    st[5] = vec3(0.7,1.0,0);
+    st[6] = vec3(0.4,0.6,0);
+    st[7] = vec3(0.7,0.5,0);
+    st[8] = vec3(0.7,1.0,0);
+    st[9] = vec3(0.7,0.5,0);
+    st[10] = vec3(0.45,0.4,0);
+    st[11] = vec3(0.7,1.0,0);
+    std::vector<vec3> verts(4);
+    verts[0] = vec3(-1,0,-4);
+    verts[1] = vec3(1,0.5,-5);
+    verts[2] = vec3(0,-0.5,-3);
+    verts[3] = vec3(-1,2,-4.5);
+    objects.emplace_back(std::make_unique<TriangleMesh>(4, faceIndex, vertsIndex, verts, st));
+    n_obj++;
 
     // Load lights
     rapidxml::xml_node<> * pLights_root = lights_root->first_node("PointLights");
@@ -141,18 +188,15 @@ int main() {
         }
 
         
-
         std::thread calc_thread([&] () {
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
-                    // Ray primaryRay(x,y,width, height, 2.0); // std::unique_ptr & std::shared_ptr
-                    // if (x ==  height/2 && y ==  width /2 ) {
                     vec3 rgb;
                     double y_offset, x_offset;
                     for (int s=0; s < antiAliasingSample; s++) {
                         y_offset = Tools::random_double();
                         x_offset = Tools::random_double();
-                        auto primaryRay = std::make_unique<Ray>(x + x_offset , y + y_offset, width, height, 90);   // fov en degrés
+                        auto primaryRay = std::make_unique<Ray>(x /* + x_offset */, y /* + y_offset */, width, height, 90);   // fov en degrés
                         primaryRay->Shoot(objects, lights, n_obj, n_lig);
                         rgb += primaryRay->color();
                     }
