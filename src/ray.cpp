@@ -1,26 +1,21 @@
 #include "ray.hpp"
 
-#define debug false
+
 
 void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::unique_ptr<Light>>& lights,
                     int n_obj, int n_lig )
 {   
-    #if debug
-    std::cout << " ------ Depth: " << _depth << std::endl;
-    #endif
     if (_depth < 0) {
-            return; //this->addColor(background)
+            return;
     }
     int min_obj_ind;
     float distance;
-    int count = 0; // test
     float min_distance = INFINITY;
     vec3 pHit, normal, hitTextureCoords;
     vec3 min_pHit, min_normal, min_hitTextureCoords;
     for (int i = 0; i < n_obj; i++) {
         distance = INFINITY;
         if (objects[i]->intersect(this, distance, pHit, normal, hitTextureCoords)) {
-            count+=1;
             if (distance < min_distance) {
                     min_distance = distance;
                     min_obj_ind = i;
@@ -28,19 +23,11 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
                     min_normal = normal;
                     min_hitTextureCoords = hitTextureCoords;
             }
-            #if debug
-            std::cout << " ** Intersecté: " << objects[i]->color() << "en " << pHit<< std::endl;
-            std::cout << " ** Distance: " << distance << std::endl;
-            #endif
         }
     }
-    #if debug
-    // std::cout << "COUNT " << count << std::endl;
-    std::cout << "##### Min distance: " << min_distance << " pour pHit: " << min_pHit <<std::endl;
-    #endif
-    if (min_distance != INFINITY ) {
+    if (min_distance != INFINITY) {
         // Ambient Lighting
-        float ambientLevel = 0.05;
+        float ambientLevel = 0.05;  // EN FAIRE UN GLOBAL 
         this->addColor(ambientLevel * objects[min_obj_ind]->color());
 
         // Shadow rays <Lambertian + Specular Lightings>
@@ -52,8 +39,9 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             float currDist;
             int vis = 1;
             L.normalize();
-            Ray shadowRay(shadowOrigin, L, this->color());      // Un autre type que les rays serait plus judicieux?
+            Ray shadowRay(shadowOrigin, L, this->color());
             for ( auto& object: objects ) {
+                currDist = INFINITY;
                 if (object->intersectShadow(shadowRay, currDist)) {
                     if (currDist < distanceToLight) {
                         vis = 0;
@@ -63,9 +51,8 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             }
 
             // Lambertian 
-            // this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * light->color());                // scratchapixel.com & http://graphics.stanford.edu/courses/cs148-10-summer/as3/instructions/as3.pdf
             this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * objects[min_obj_ind]->colorFromTexture(min_hitTextureCoords));
-
+            
             // Specular
             vec3 R;
             shadowRay.computeReflectedDirection(min_normal,R);
@@ -100,16 +87,14 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             
             // Loi de fresnel
-            #if debug
-            std::cout << "KR: " << kr << std::endl;
-            #endif
             this->addColor(kr * mirrorRay->color() + (1-kr) * refractionColor);
         }//(reflexion + refraction)
 
         // Réflexion seulement
         else if (objects[min_obj_ind]->isMirror()) {
             vec3 bias = 0.001 * min_normal;
-            vec3 newOrigin = min_pHit + bias;
+            bool outside = this->direction().dot(min_normal) < 0;
+            vec3 newOrigin = outside ? min_pHit + bias : min_pHit - bias;
             vec3 newColor = this->color();
             vec3 newDirection;
             this->computeReflectedDirection(min_normal, newDirection);
@@ -117,14 +102,14 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
         }//(reflexion)
+
+        // else if (->isTransparent()) ??
     } else {
-        
-        if (_depth == 2) {
+        if (_depth == 4) {
             auto t = 0.5*this->direction().y() + 1.0;
             this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color?
         } else {
-            this->addColor(vec3(0,0,0)); // Background color?
-            // std::cout << "rien touché à depth " << _depth << std::endl; 
+            this->addColor(vec3(0,0,0));
         }
         
     }

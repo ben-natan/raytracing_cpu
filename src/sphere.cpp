@@ -3,12 +3,11 @@
 
 bool Sphere::intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const
 {
-// a = 1 , b = 2D(O-C) c = |O-C|^2 - R^2
     float t0, t1;
     float a = ray->direction().dot(ray->direction());
     vec3 L = ray->origin() - _center;
     float b = 2*ray->direction().dot(L);
-    float c = L.dot(L) - _radius * _radius;  // PERF: stocker radius au carré
+    float c = L.dot(L) - _radius * _radius;
     if (!Tools::solveQuadratic(a,b,c, t0, t1)) {
         return false;
     }
@@ -39,7 +38,7 @@ bool Sphere::intersectShadow(Ray ray, float& distance) const
         return false;
     }
 
-    if (t0 > 0.001) { //pour eviter l'acne
+    if (t0 > 0.001) {
         distance = t0;
     } else {
         if (t1 < 0) {

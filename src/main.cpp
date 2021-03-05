@@ -1,14 +1,9 @@
-// #include <SFML/Window.hpp>
-#include "light.hpp"
 #include "vec3.hpp"
-#include "mat4.hpp"
-#include "sphere.hpp"
-#include "plane.hpp"
+#include "object.hpp"
 #include "ray.hpp"
 #include "tools.hpp"
 #include "mesh.hpp"
 #include "trianglemesh.hpp"
-#include "triangle.hpp"
 #include <iostream>
 #include <vector>
 #include <SDL.h>
@@ -17,20 +12,15 @@
 #include <fstream>
 #include <rapidxml.hpp>
 #include <stdlib.h>
-
-
-
+#include <chrono>
 
 #define pano false
 
 
-// using namespace rapidxml;
-
-
 int main() {
 
-    int width = 640;
-    int height = 640;
+    int width = 320;
+    int height = 320;
     int antiAliasingSample = 1;
 
     #if pano
@@ -39,119 +29,21 @@ int main() {
     #endif
 
     // // Initialiser les objets en XML;
-
-    std::cout << "Loading world.." << std::endl;
-    std::cout << std::endl;
-
-
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
     
     int n_obj = 0, n_lig = 0;
 
-    // Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
+    Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
 
-    
-    rapidxml::xml_document<> doc;
-    rapidxml::xml_node<> * root_node;
-
-    std::ifstream theFile("../data/spheres.xml");
-    std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
-    buffer.push_back('\0');
-            
-    doc.parse<0>(&buffer[0]);
-
-    root_node = doc.first_node("World");
-    rapidxml::xml_node<> * objects_root = root_node->first_node("Objects");
-    rapidxml::xml_node<> * lights_root = root_node->first_node("Lights");
-
-    
-    // Load objects
-    rapidxml::xml_node<> * spheres_root = objects_root->first_node("Spheres");
-    for (rapidxml::xml_node<> * sphere = spheres_root->first_node("Sphere"); sphere; sphere = sphere->next_sibling()) {
-        std::cout << "Loading sphere" << " " << n_obj << ".." << std::endl;
-        float cx, cy, cz, r;
-        cx = atof(sphere->first_attribute("cx")->value());
-        cy = atof(sphere->first_attribute("cy")->value());
-        cz = atof(sphere->first_attribute("cz")->value());
-        r = atof(sphere->first_attribute("r")->value());
-        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(123,20,50))));
-        n_obj++;
-    }
-
-    rapidxml::xml_node<> * planes_root = objects_root->first_node("Planes");
-    for (rapidxml::xml_node<> * plane = planes_root->first_node("Plane"); plane; plane = plane->next_sibling()) {
-        std::cout << "Loading plane" << " " << n_obj << ".." << std::endl;
-        float px, py, pz;
-        float nx, ny, nz;
-        px = atof(plane->first_attribute("px")->value());
-        py = atof(plane->first_attribute("py")->value());
-        pz = atof(plane->first_attribute("pz")->value());
-        nx = atof(plane->first_attribute("nx")->value());
-        ny = atof(plane->first_attribute("ny")->value());
-        nz = atof(plane->first_attribute("nz")->value());
-        objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(50,0,50))));
-        n_obj++;
-    }
-
-    // PolygonMesh poly_mesh = PolygonMesh();
-    // poly_mesh.loadGeoFile("../data/cow.geo");
-    // objects.emplace_back(std::make_unique<TriangleMesh>(poly_mesh.nfaces(), poly_mesh.faceIndex(), poly_mesh.vertsIndex(), poly_mesh.verts()));
-    
-    std::vector<int> faceIndex(4);
-    faceIndex[0] = 3;
-    faceIndex[1] = 3;
-    faceIndex[2] = 3;
-    faceIndex[3] = 3;
-    std::vector<int> vertsIndex(12);
-    vertsIndex[0] = 0;
-    vertsIndex[1] = 1;
-    vertsIndex[2] = 2;
-    vertsIndex[3] = 0;
-    vertsIndex[4] = 2;
-    vertsIndex[5] = 3;
-    vertsIndex[6] = 2;
-    vertsIndex[7] = 1;
-    vertsIndex[8] = 3;
-    vertsIndex[9] = 1;
-    vertsIndex[10] = 0;
-    vertsIndex[11] = 3;
-    std::vector<vec3> st(12);
-    st[0] = vec3(0.45,0.4,0);
-    st[1] = vec3(0.7,0.5,0);
-    st[2] = vec3(0.4,0.6,0);
-    st[3] = vec3(0.45,0.4,0);
-    st[4] = vec3(0.4,0.6,0);
-    st[5] = vec3(0.7,1.0,0);
-    st[6] = vec3(0.4,0.6,0);
-    st[7] = vec3(0.7,0.5,0);
-    st[8] = vec3(0.7,1.0,0);
-    st[9] = vec3(0.7,0.5,0);
-    st[10] = vec3(0.45,0.4,0);
-    st[11] = vec3(0.7,1.0,0);
-    std::vector<vec3> verts(4);
-    verts[0] = vec3(-1,0,-4);
-    verts[1] = vec3(1,0.5,-5);
-    verts[2] = vec3(0,-0.5,-3);
-    verts[3] = vec3(-1,2,-4.5);
-    objects.emplace_back(std::make_unique<TriangleMesh>(4, faceIndex, vertsIndex, verts, st));
+    objects.emplace_back(std::make_unique<TriangleMesh>("../data/cube.obj"));
     n_obj++;
 
-    // Load lights
-    rapidxml::xml_node<> * pLights_root = lights_root->first_node("PointLights");
-    for (rapidxml::xml_node<> * light = pLights_root->first_node("PointLight"); light; light = light->next_sibling()) {
-        std::cout << "Loading pointLight" << " " << n_lig << ".." << std::endl;
-        float px, py, pz;
-        px = atof(light->first_attribute("px")->value());
-        py = atof(light->first_attribute("py")->value());
-        pz = atof(light->first_attribute("pz")->value());
-        lights.emplace_back(std::make_unique<PointLight>(PointLight(mat4(), vec3(px,py,pz))));
-        n_lig++;
-    }
-    std::cout << std::endl;
-    std::cout << "Successfully loaded " << n_obj << " objects and " << n_lig << " lights." << std::endl;
-    std::cout << std::endl;
 
+    // TriangleMesh *mesh = TriangleMesh::generatePolySphere(vec3(0,0,-1),1, 10);
+    // objects.push_back(std::unique_ptr<Object>(mesh));
+    // objects[0]->moveBack(1);
+    // n_obj++;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return 1;
@@ -174,12 +66,10 @@ int main() {
     SDL_Event event;
 
     std::vector<vec3> framebuffer = std::vector<vec3>(width*height); 
-    int frame = -1;
+    int frame = 0;
+    std::chrono::time_point<std::chrono::system_clock> start_rendering, end_rendering;
 
     while (!quit) {
-        //drawing particles
-        //setting up objects
-        //repeated over and over again
 
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -187,13 +77,15 @@ int main() {
             }
         }
 
-        
+        start_rendering = std::chrono::system_clock::now();
+
         std::thread calc_thread([&] () {
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
                     vec3 rgb;
                     double y_offset, x_offset;
                     for (int s=0; s < antiAliasingSample; s++) {
+                        // std::cout << "Pixel: " << x << ", " << y << std::endl;
                         y_offset = Tools::random_double();
                         x_offset = Tools::random_double();
                         auto primaryRay = std::make_unique<Ray>(x /* + x_offset */, y /* + y_offset */, width, height, 90);   // fov en degrés
@@ -207,10 +99,8 @@ int main() {
         });
 
         std::thread render_thread([&] () {
-            // We clear what we draw before
             SDL_RenderClear(s);
 
-            // Now we can draw our point
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
                     vec3 rgb = framebuffer[y + x*width];
@@ -218,26 +108,24 @@ int main() {
                     SDL_RenderDrawPoint(s, x, y);
                 }
             }
-            frame+= 1;
-            if (frame != 0) {
-                std::cout << " -- Frame " << frame << std::endl;
-            }
-            
-
-            // And now we present everything we draw after the clear.
             SDL_RenderPresent(s);
         });
 
         calc_thread.join();
         render_thread.join();
         
+        end_rendering = std::chrono::system_clock::now();
+
+        std::chrono::duration<double> rendering_time = end_rendering - start_rendering;
+
+        frame+= 1;
+        std::cout << " -- Frame " << frame << " --  #  " << rendering_time.count() << " sec." << std::endl;
         
         
     }
 
 
     SDL_DestroyWindow(window);
-    // We have to destroy the renderer, same as with the window.
     SDL_DestroyRenderer(s);
     SDL_Quit();
 

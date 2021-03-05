@@ -1,23 +1,19 @@
 #ifndef LIGHT_H
 #define LIGHT_H
-#include "mat4.hpp"
 #include "vec3.hpp"
 
 
 
 class Light {
     protected:
-        mat4 _lightToWorld;
         vec3 _color;
         float _intensity;
 
     public:
-        Light() : _lightToWorld(mat4()), _color(vec3(255,255,255)), _intensity(1.0) {}
-        Light(const mat4 &l2w): _lightToWorld(l2w) {} 
+        Light() : _color(vec3(255,255,255)), _intensity(3.0) {}
+        Light(vec3 color, float intensity = 3.0) : _color(color) {} 
 
-        virtual ~Light() {
-            
-        }
+        virtual ~Light() = default;
 
         float intensity() {
             return _intensity;
@@ -38,8 +34,8 @@ class PointLight: public Light {
     private:
         vec3 _pos;
     public:
-        PointLight(const mat4 &l2w, const vec3 &pos, const vec3 &color = vec3(255,255,255), const float &intensity = 1.0):
-                Light(l2w),
+        PointLight(const vec3 &pos, const vec3 &color = vec3(255,255,255), const float &intensity = 3.0):
+                Light(),
                 _pos(pos)
                 {
                     this->_color = color;
@@ -57,12 +53,12 @@ class PointLight: public Light {
 };
 
 
-class DistantLight: public Light {
+class DirectionalLight: public Light {
     private:
         vec3 _dir;
     public:
-        DistantLight(const mat4 &l2w, const vec3 &dir, const vec3 &color = vec3(255,255,255), const float &intensity = 1.0) :
-                Light(l2w),
+        DirectionalLight(const vec3 &dir, const vec3 &color = vec3(255,255,255), const float &intensity = 1.0) :
+                Light(),
                 _dir(dir)
                 {
                     this->_color = color;

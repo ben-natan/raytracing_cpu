@@ -14,8 +14,10 @@ class PolygonMesh {
         std::vector<int> _vertsIndex;
         int _vertsArraySize; 
         std::vector<vec3> _verts;
-        // std::vector<vec3> _normals; POUR PLUS TARD
-        // std::vector<vec3> _st;
+        std::vector<int> _texIndex;
+        std::vector<vec3> _st;
+        std::vector<int> _norIndex;
+        std::vector<vec3> _normals;
 
     public:
 
@@ -90,6 +92,63 @@ class PolygonMesh {
         std::vector<vec3> verts() {
             return _verts;
         }
+
+        void loadObjModel(const char *filename) {
+            // Initialiser l'objet
+            std::ifstream in(filename, std::ios::in);
+            if (!in) {
+                std::cerr << "Failed to open file" << std::endl;
+            }
+
+            std::string line;
+            while (std::getline(in, line)) {
+                if (line.substr(0,2) == "v ") {
+                    std::istringstream v(line.substr(2));
+                    vec3 vert;
+                    double x,y,z;
+                    v>>x;v>>y;v>>z;
+                    vert = vec3(x,y,z);
+                    _verts.push_back(vert);
+                }
+                else if (line.substr(0,2) == "vt") {
+                    std::istringstream v(line.substr(3));
+                    vec3 tex;
+                    int U,V;
+                    v >> U; v >> V;
+                    tex = vec3(U,V,0);
+                    _st.push_back(tex);
+                }
+                else if (line.substr(0,2) == "vn") {
+                    std::istringstream v(line.substr(3));
+                    vec3 nor;
+                    double x,y,z;
+                    v >> x; v>> y; v>>z;
+                    nor = vec3(x,y,z);
+                    _normals.push_back(nor);
+                }
+                else if (line.substr(0,2)=="f ") {
+                    int a,b,c; //mesh index
+                    int A,B,C; //texture index
+                    int x,y,z; //norm index
+                    const char* chh=line.c_str();
+                    sscanf(chh, "f -%i/-%i/-%i/-1 -%i/-%i/-%i/-1 -%i/-%i/-%i/-1", &a, &A, &x, &b, &B, &y, &c, &C, &z);
+                    a--;b--;c--;
+                    A--;B--;C--;
+                    x--;y--;z--;
+                    _faceIndex.push_back(a);
+                    _faceIndex.push_back(b);
+                    _faceIndex.push_back(c);
+                    _texIndex.push_back(A);
+                    _texIndex.push_back(B);
+                    _texIndex.push_back(C);
+                    _norIndex.push_back(x);
+                    _norIndex.push_back(y);
+                    _norIndex.push_back(z);
+                }
+
+
+            }
+        } 
 
 
 

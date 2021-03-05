@@ -17,22 +17,14 @@ exception
 -
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
-mat4.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp
-light.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-mat4.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
-sphere.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
-plane.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
+object.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
 ray.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 tools.hpp
@@ -41,8 +33,6 @@ mesh.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/mesh.hpp
 trianglemesh.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
-triangle.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
 iostream
 -
 vector
@@ -59,9 +49,7 @@ rapidxml.hpp
 -
 stdlib.h
 -
-
-/Users/bennatanadrien/projects/raytracing_cpu/src/mat4.hpp
-vector
+chrono
 -
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/mesh.hpp
@@ -83,12 +71,14 @@ vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-ray.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 iostream
 -
 algorithm
 -
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/plane.cpp
+plane.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
 iostream
@@ -97,18 +87,24 @@ cmath
 -
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-tools.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
 light.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
+tools.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
 vector
 -
 memory
@@ -116,13 +112,17 @@ memory
 cmath
 -
 
+/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
+sphere.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+
 /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-ray.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 iostream
 /Users/bennatanadrien/projects/raytracing_cpu/src/iostream
 
@@ -133,21 +133,51 @@ algorithm
 -
 random
 -
+light.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
+rapidxml.hpp
+-
+fstream
+-
+object.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+sphere.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+plane.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
+triangle.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.cpp
+triangle.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
+
+/Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.cpp
+trianglemesh.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
+triangle.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
 vec3.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-ray.hpp
-/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 object.hpp
 /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
+ray.hpp
+/Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
 vector
+-
+fstream
+-
+sstream
 -
 
 /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp

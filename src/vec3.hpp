@@ -43,17 +43,19 @@ class vec3 {
         }
 
         // Operators .. ------------------&
-        vec3 operator *(vec3 otherVec) {
+        vec3 operator *(const vec3& otherVec) const {
             return vec3(_x * otherVec._x, _y * otherVec._y, _z * otherVec._z);
         };
         
-        vec3 operator +(vec3 otherVec) {
+        vec3 operator +(const vec3& otherVec) const {
             return vec3(_x+ otherVec._x, _y + otherVec._y, _z+ otherVec._z);
         };
 
-        vec3 operator -(const vec3& otherVec) {
+        vec3 operator -(const vec3& otherVec) const {
             return vec3(_x- otherVec._x, _y - otherVec._y, _z - otherVec._z);
         };
+
+       
 
         vec3 operator -() {
             return vec3(-_x, -_y, -_z);

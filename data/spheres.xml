@@ -2,17 +2,16 @@
 <World>
     <Objects>
         <Spheres>
-            <Sphere cx="-0.8" cy="0" cz="-1" r="0.5"/>
-            <Sphere cx="3" cy="3" cz="-1" r="0.5"/>
             <Sphere cx="0" cy="-100.5" cz="-1" r="100" />
+            <Sphere cx="-2.8" cy="1.2" cz="-6" r="1"/>
         </Spheres>
         <Planes>
-            <Plane px="0" py="-3.0" pz="-17" nx="0" ny="1" nz="0"/>
+            <Plane px="0" py="-5.0" pz="-17" nx="0" ny="1" nz="0"/>
         </Planes>
     </Objects>
     <Lights>
         <PointLights>
-            <PointLight px="0" py="3" pz="-5"/>
+            <PointLight px="0" py="0" pz="2"/>
         </PointLights>
     </Lights>
 </World>
