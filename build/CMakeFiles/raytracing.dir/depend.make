@@ -4,7 +4,6 @@
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../include/rapidxml.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/light.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/mesh.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/object.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/ray.hpp
@@ -69,6 +68,7 @@ CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/sphere.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/triangle.hpp
+CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/trianglemesh.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/vec3.hpp
 
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../include/rapidxml.hpp
@@ -80,6 +80,7 @@ CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/sphere.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/triangle.hpp
+CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/trianglemesh.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/vec3.hpp
 
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../include/rapidxml.hpp
@@ -91,6 +92,7 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/sphere.cpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/sphere.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/triangle.hpp
+CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/trianglemesh.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/vec3.hpp
 
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../include/rapidxml.hpp
@@ -102,6 +104,7 @@ CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/sphere.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/triangle.cpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/triangle.hpp
+CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/trianglemesh.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/vec3.hpp
 
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../include/rapidxml.hpp

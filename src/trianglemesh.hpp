@@ -3,11 +3,11 @@
 
 #include "vec3.hpp"
 #include "object.hpp"
-#include "ray.hpp"
 #include <vector>
 #include <fstream>
 #include <sstream>
 
+class Ray;
 
 class TriangleMesh : public Object {
     protected:

@@ -2,7 +2,6 @@
 #include "object.hpp"
 #include "ray.hpp"
 #include "tools.hpp"
-#include "mesh.hpp"
 #include "trianglemesh.hpp"
 #include <iostream>
 #include <vector>
@@ -17,29 +16,17 @@
 
 int main() {
 
-    int depth, width, height, antiAliasingSample;
+    int depth, width, height, antiAliasingSample, numThreads;
     float epsilon, ambientLevel;
-    Tools::getConfig("../data/config.xml", depth, epsilon, width, height, antiAliasingSample, ambientLevel);
-
-
-
+    Tools::getConfig("../data/config.xml", depth, epsilon, width, height, antiAliasingSample, ambientLevel, numThreads);
+    
     // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
-    
     int n_obj = 0, n_lig = 0;
 
-    Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
+    Tools::parseObjectsAndLights("../data/scene.xml", objects, lights, n_obj, n_lig);
 
-    objects.emplace_back(std::make_unique<TriangleMesh>("../data/cube3.obj"));
-    // objects[0]->moveBack(3);
-    n_obj++;
-
-
-    // TriangleMesh *mesh = TriangleMesh::generatePolySphere(vec3(0,1,-3),1, 20);
-    // objects.push_back(std::unique_ptr<Object>(mesh));
-    // objects[0]->moveBack(1);
-    // n_obj++;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return 1;
@@ -76,6 +63,7 @@ int main() {
         start_rendering = std::chrono::system_clock::now();
 
         std::thread calc_thread([&] () {
+            // #pragma omp parallel for
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
                     vec3 rgb;

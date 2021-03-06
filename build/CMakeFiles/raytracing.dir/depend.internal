@@ -5,7 +5,6 @@ CMakeFiles/raytracing.dir/src/main.cpp.o
  ../include/rapidxml.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/main.cpp
- /Users/bennatanadrien/projects/raytracing_cpu/src/mesh.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/object.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
@@ -70,6 +69,7 @@ CMakeFiles/raytracing.dir/src/plane.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o
  ../include/rapidxml.hpp
@@ -81,6 +81,7 @@ CMakeFiles/raytracing.dir/src/ray.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o
  ../include/rapidxml.hpp
@@ -92,6 +93,7 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o
  ../include/rapidxml.hpp
@@ -103,6 +105,7 @@ CMakeFiles/raytracing.dir/src/triangle.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.cpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o
  ../include/rapidxml.hpp

@@ -11,6 +11,7 @@
 #include "sphere.hpp"
 #include "plane.hpp"
 #include "triangle.hpp"
+#include "trianglemesh.hpp"
 #include <chrono>
 
 class Tools {
@@ -69,12 +70,25 @@ class Tools {
                     for (rapidxml::xml_node<> * sphere = spheres_root->first_node("Sphere"); sphere; sphere = sphere->next_sibling()) {
                         std::cout << "Loading sphere" << " " << n_obj << ".." << std::endl;
                         float cx, cy, cz, r;
+                        int red, green, blue;
                         cx = atof(sphere->first_attribute("cx")->value());
                         cy = atof(sphere->first_attribute("cy")->value());
                         cz = atof(sphere->first_attribute("cz")->value());
                         r = atof(sphere->first_attribute("r")->value());
-                        objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(123,20,50))));
-                        n_obj++;
+                        red = atof(sphere->first_attribute("red")->value());
+                        green = atof(sphere->first_attribute("green")->value());
+                        blue = atof(sphere->first_attribute("blue")->value());
+
+                        if (sphere->first_attribute("ior")) {
+                            float ior = atof(sphere->first_attribute("ior")->value());
+                            objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,green,blue), true, ior)));
+                            n_obj++;
+                        } else {
+                            objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,green,blue))));
+                            n_obj++;
+                        }
+
+                        
                     }
                 }
                 
@@ -85,15 +99,47 @@ class Tools {
                         std::cout << "Loading plane" << " " << n_obj << ".." << std::endl;
                         float px, py, pz;
                         float nx, ny, nz;
+                        int red, green, blue;
                         px = atof(plane->first_attribute("px")->value());
                         py = atof(plane->first_attribute("py")->value());
                         pz = atof(plane->first_attribute("pz")->value());
                         nx = atof(plane->first_attribute("nx")->value());
                         ny = atof(plane->first_attribute("ny")->value());
                         nz = atof(plane->first_attribute("nz")->value());
-                        objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(50,0,50))));
+                        red = atof(plane->first_attribute("red")->value());
+                        green = atof(plane->first_attribute("green")->value());
+                        blue = atof(plane->first_attribute("blue")->value());
+
+                        objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(red,green,blue))));
                         n_obj++;
                     } 
+                }
+
+                rapidxml::xml_node<> * objFiles_root = objects_root->first_node("obj-files");
+                if (objFiles_root) {
+                    for (rapidxml::xml_node<> * objFile = objFiles_root->first_node("obj-file"); objFile; objFile = objFile->next_sibling()) {
+                        objects.emplace_back(std::make_unique<TriangleMesh>(objFile->value()));
+                        n_obj++;
+                    }
+                }
+
+                rapidxml::xml_node<> * proceduralMeshes_root = objects_root->first_node("Procedural-meshes");
+                if (proceduralMeshes_root) {
+                    rapidxml::xml_node<> * sphereMeshes_root = proceduralMeshes_root->first_node("Sphere-meshes");
+                    if (sphereMeshes_root) {
+                        for (rapidxml::xml_node<> * sphereMesh = sphereMeshes_root->first_node("Mesh"); sphereMesh; sphereMesh = sphereMesh->next_sibling()) {
+                            float cx, cy, cz, r;
+                            int divs;
+                            cx = atof(sphereMesh->first_attribute("cx")->value());
+                            cy = atof(sphereMesh->first_attribute("cy")->value());
+                            cz = atof(sphereMesh->first_attribute("cz")->value());
+                            r = atof(sphereMesh->first_attribute("r")->value());
+                            divs = atoi(sphereMesh->first_attribute("divs")->value());
+                            TriangleMesh *mesh = TriangleMesh::generatePolySphere(vec3(cx,cy,cz),r,divs);
+                            objects.push_back(std::unique_ptr<Object>(mesh));
+                            n_obj++;
+                        }
+                    }
                 }
             }
             
@@ -135,7 +181,7 @@ class Tools {
         }
 
 
-        static void getConfig(std::string configfilename, int& depth, float& epsilon, int& sWidth, int& sHeight, int& antiAliasingSample, float& ambientLevel) {
+        static void getConfig(std::string configfilename, int& depth, float& epsilon, int& sWidth, int& sHeight, int& antiAliasingSample, float& ambientLevel, int numThreads) {
             rapidxml::xml_document<> doc;
             rapidxml::xml_node<> * root_node;
 
@@ -152,6 +198,7 @@ class Tools {
             rapidxml::xml_node<> * sHeight_node = root_node->first_node("screen-height");
             rapidxml::xml_node<> * antiAliSample_node = root_node->first_node("anti-aliasing-sample");
             rapidxml::xml_node<> * ambientLevel_node = root_node->first_node("ambient-level");
+            rapidxml::xml_node<> * numThreads_node = root_node->first_node("num-threads");
             
 
             if (depth_node) {
@@ -188,6 +235,12 @@ class Tools {
                 ambientLevel = atof(ambientLevel_node->value());
             } else {
                 ambientLevel = 0.005;
+            }
+
+            if (numThreads_node) {
+                numThreads = atoi(numThreads_node->value());
+            } else {
+                numThreads = 1;
             }
 
 
