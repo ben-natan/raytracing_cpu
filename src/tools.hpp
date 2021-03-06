@@ -181,7 +181,7 @@ class Tools {
         }
 
 
-        static void getConfig(std::string configfilename, int& depth, float& epsilon, int& sWidth, int& sHeight, int& antiAliasingSample, float& ambientLevel, int numThreads) {
+        static void getConfig(std::string configfilename, int& depth, float& epsilon, int& sWidth, int& sHeight, int& antiAliasingSample, float& ambientLevel, int& numThreads) {
             rapidxml::xml_document<> doc;
             rapidxml::xml_node<> * root_node;
 
@@ -240,7 +240,7 @@ class Tools {
             if (numThreads_node) {
                 numThreads = atoi(numThreads_node->value());
             } else {
-                numThreads = 1;
+                numThreads = 4;
             }
 
 

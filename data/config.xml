@@ -6,4 +6,5 @@
     <screen-height>640</screen-height>
     <anti-aliasing-sample>4</anti-aliasing-sample>
     <ambient-level>0.005</ambient-level>
+    <num-threads>10</num-threads>
 </config>

@@ -19,6 +19,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Raytracing"
   "/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2"
   "../external/sfml/include"
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

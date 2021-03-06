@@ -58,6 +58,7 @@ CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/includ
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL_video.h
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/begin_code.h
 CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/close_code.h
+CMakeFiles/raytracing.dir/src/main.cpp.o: /usr/local/include/omp.h
 
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../include/rapidxml.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/light.hpp

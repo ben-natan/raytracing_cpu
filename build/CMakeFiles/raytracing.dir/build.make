@@ -174,6 +174,7 @@ raytracing: CMakeFiles/raytracing.dir/src/sphere.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/triangle.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o
 raytracing: CMakeFiles/raytracing.dir/build.make
+raytracing: /usr/local/lib/libomp.dylib
 raytracing: CMakeFiles/raytracing.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable raytracing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raytracing.dir/link.txt --verbose=$(VERBOSE)

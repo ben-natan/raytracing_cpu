@@ -12,6 +12,7 @@
 #include <rapidxml.hpp>
 #include <stdlib.h>
 #include <chrono>
+#include <omp.h>
 
 
 int main() {
@@ -19,7 +20,7 @@ int main() {
     int depth, width, height, antiAliasingSample, numThreads;
     float epsilon, ambientLevel;
     Tools::getConfig("../data/config.xml", depth, epsilon, width, height, antiAliasingSample, ambientLevel, numThreads);
-    
+
     // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
@@ -63,7 +64,7 @@ int main() {
         start_rendering = std::chrono::system_clock::now();
 
         std::thread calc_thread([&] () {
-            // #pragma omp parallel for
+            #pragma omp parallel for num_threads(numThreads)
             for (int y = 0; y < width; y++) {
                 for (int x = 0; x < height; x++) {
                     vec3 rgb;
