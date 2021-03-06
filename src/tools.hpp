@@ -12,7 +12,9 @@
 #include "plane.hpp"
 #include "triangle.hpp"
 #include "trianglemesh.hpp"
+#include "texture.hpp"
 #include <chrono>
+#include <cstring>
 
 class Tools {
     public:
@@ -71,21 +73,42 @@ class Tools {
                         std::cout << "Loading sphere" << " " << n_obj << ".." << std::endl;
                         float cx, cy, cz, r;
                         int red, green, blue;
+                        char* texture;
                         cx = atof(sphere->first_attribute("cx")->value());
                         cy = atof(sphere->first_attribute("cy")->value());
                         cz = atof(sphere->first_attribute("cz")->value());
                         r = atof(sphere->first_attribute("r")->value());
-                        red = atof(sphere->first_attribute("red")->value());
-                        green = atof(sphere->first_attribute("green")->value());
-                        blue = atof(sphere->first_attribute("blue")->value());
 
+                        if (sphere->first_attribute("red")) {
+                            red = atof(sphere->first_attribute("red")->value());
+                            green = atof(sphere->first_attribute("green")->value());
+                            blue = atof(sphere->first_attribute("blue")->value());
+                        }
                         if (sphere->first_attribute("ior")) {
                             float ior = atof(sphere->first_attribute("ior")->value());
-                            objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,green,blue), true, ior)));
-                            n_obj++;
+                            if (sphere->first_attribute("texture")) {
+                                texture = sphere->first_attribute("texture")->value();
+                                if (strcmp(texture, "checkers") == 0) {
+                                    Texture* texture = new CheckersTexture();
+                                    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, texture, true, ior)));
+                                    n_obj++;
+                                }
+                            } else  {
+                                objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,blue,green), true, ior)));
+                                n_obj++;
+                            }
                         } else {
-                            objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,green,blue))));
-                            n_obj++;
+                            if (sphere->first_attribute("texture")) {
+                                texture = sphere->first_attribute("texture")->value();
+                                if (strcmp(texture, "checkers") == 0) {
+                                    Texture* texture = new CheckersTexture();
+                                    objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, texture)));
+                                    n_obj++;
+                                }
+                            } else {
+                                objects.emplace_back(std::make_unique<Sphere>(Sphere(vec3(cx,cy,cz), r, vec3(red,green,blue))));
+                                n_obj++;
+                            }
                         }
 
                         
@@ -100,18 +123,45 @@ class Tools {
                         float px, py, pz;
                         float nx, ny, nz;
                         int red, green, blue;
+                        char* texture;
                         px = atof(plane->first_attribute("px")->value());
                         py = atof(plane->first_attribute("py")->value());
                         pz = atof(plane->first_attribute("pz")->value());
                         nx = atof(plane->first_attribute("nx")->value());
                         ny = atof(plane->first_attribute("ny")->value());
                         nz = atof(plane->first_attribute("nz")->value());
-                        red = atof(plane->first_attribute("red")->value());
-                        green = atof(plane->first_attribute("green")->value());
-                        blue = atof(plane->first_attribute("blue")->value());
 
-                        objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz),vec3(nx,ny,nz), vec3(red,green,blue))));
-                        n_obj++;
+                        if (plane->first_attribute("red")) {
+                            red = atof(plane->first_attribute("red")->value());
+                            green = atof(plane->first_attribute("green")->value());
+                            blue = atof(plane->first_attribute("blue")->value());
+                        }
+                        if (plane->first_attribute("ior")) {
+                            float ior = atof(plane->first_attribute("ior")->value());
+                            if (plane->first_attribute("texture")) {
+                                texture = plane->first_attribute("texture")->value();
+                                if (strcmp(texture, "checkers") == 0) {
+                                    Texture* texture = new CheckersTexture();
+                                    objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz), vec3(nx,ny,nz), texture, true, ior)));
+                                    n_obj++;
+                                }
+                            } else {
+                                objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz), vec3(nx,ny,nz), vec3(red,green,blue), true, ior)));
+                                n_obj++;
+                            }
+                        } else {
+                            if (plane->first_attribute("texture")) {
+                                texture = plane->first_attribute("texture")->value();
+                                if (strcmp(texture, "checkers") == 0) {
+                                    Texture* texture = new CheckersTexture();
+                                    objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz), vec3(nx,ny,nz), texture)));
+                                    n_obj++;
+                                }
+                            } else {
+                                objects.emplace_back(std::make_unique<Plane>(Plane(vec3(px,py,pz), vec3(nx,ny,nz), vec3(red,green,blue))));
+                                n_obj++;
+                            }
+                        }
                     } 
                 }
 

@@ -8,6 +8,7 @@ CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/object.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/main.cpp.o: ../src/trianglemesh.hpp
@@ -67,6 +68,7 @@ CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/plane.cpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/plane.cpp.o: ../src/trianglemesh.hpp
@@ -79,6 +81,7 @@ CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/ray.cpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/ray.cpp.o: ../src/trianglemesh.hpp
@@ -91,6 +94,7 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/sphere.cpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/trianglemesh.hpp
@@ -102,6 +106,7 @@ CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/object.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/triangle.cpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/triangle.hpp
@@ -114,6 +119,7 @@ CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/object.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/plane.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/ray.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/sphere.hpp
+CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/texture.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/trianglemesh.cpp

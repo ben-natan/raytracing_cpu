@@ -7,6 +7,7 @@
 #ifndef PLANE_H
 #define PLANE_H
 
+class Texture;
 
 class Plane: public Object {
     private:
@@ -14,10 +15,9 @@ class Plane: public Object {
         vec3 _normal; //normalisé
 
     public:
-        Plane(): Object(0.8,false,0.18), _position(vec3(0,-1,0)), _normal(vec3(0,1,0)) {};
-        Plane(vec3 pos): Object(0.8,false,0.18), _position(pos), _normal(vec3(0,1,0)) {};
-        Plane(vec3 pos, vec3 nor): Object(0.8,false,0.18), _position(pos), _normal(nor.normalize()) {};
-        Plane(vec3 pos, vec3 nor, vec3 color): Object(0.8,false,0.18), _position(pos), _normal(nor.normalize()) {};
+
+        Plane(vec3 pos, vec3 nor, vec3 color, bool transparent = false, float ior = 1.5): Object(0.3, transparent, color, 0.18, 3, ior), _position(pos), _normal(nor.normalize()) {};
+        Plane(vec3 pos, vec3 nor, Texture* texture, bool transparent = false, float ior = 1.5): Object(0.3, transparent, texture, 0.18, 3, ior), _position(pos), _normal(nor.normalize()) {};
 
         bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
         void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;

@@ -1,4 +1,5 @@
 #include "plane.hpp"
+#include <algorithm>
 
 bool Plane::intersect(Ray* ray, float& distance, int& meshIndex) const
 {
@@ -8,9 +9,7 @@ bool Plane::intersect(Ray* ray, float& distance, int& meshIndex) const
         distance = (1/(float)denominator) *diff.dot(_normal);
         vec3 pHit = ray->origin() + distance*ray->direction();
         vec3 diskR = pHit - _position;
-        if (diskR.dot(diskR) < 800) {
-            return (distance >= 0); 
-        }
+        return (distance >= 0); 
     }
     return false;
 }
@@ -18,5 +17,10 @@ bool Plane::intersect(Ray* ray, float& distance, int& meshIndex) const
 void Plane::getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const {
     pHit = ray->origin() + distance * ray->direction();
     normal = _normal;
-    // hitTextureCoords
+    vec3 u = vec3(_normal.y(), - _normal.x(), 0).normalize();
+    vec3 v = u.crossProduct(_normal);
+    float hitX = u.dot(pHit);
+    float hitY = v.dot(pHit);
+    hitX > 0 ? hitTextureCoords.setx(hitX) : hitTextureCoords.setx(-hitX);
+    hitY > 0 ? hitTextureCoords.sety(hitY) : hitTextureCoords.sety(-hitY);
 }

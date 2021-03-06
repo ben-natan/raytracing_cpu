@@ -144,13 +144,6 @@ class TriangleMesh : public Object {
             }
         }
 
-        vec3 colorFromTexture(vec3 hitTextureCoords) override {
-            // Ici on fait un damier
-            int M = 10;
-            float checker = (fmod(hitTextureCoords.x() * M, 1.0) > 0.5) ^ (fmod(hitTextureCoords.y() * M, 1.0) < 0.5);
-            return checker ? vec3(0,0,0) : vec3(255,255,255);
-        }
-
         static TriangleMesh *generatePolySphere(vec3 center, float rad, int divs) {
             // generate points                                                                                                                                                                                      
             uint32_t numVertices = (divs - 1) * divs + 2; 

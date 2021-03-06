@@ -17,15 +17,15 @@ class vec3 {
         vec3(float gX, float gY, float gZ): _x(gX), _y(gY), _z(gZ) {};
 
         // Getters......------------------&
-        float x() {
+        float x() const {
             return _x;
         }
 
-        float y() {
+        float y() const {
             return _y;
         }
 
-        float z() {
+        float z() const {
             return _z;
         }
 

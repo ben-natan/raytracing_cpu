@@ -9,6 +9,7 @@ CMakeFiles/raytracing.dir/src/main.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
@@ -68,6 +69,7 @@ CMakeFiles/raytracing.dir/src/plane.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
@@ -80,6 +82,7 @@ CMakeFiles/raytracing.dir/src/ray.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.cpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
@@ -92,6 +95,7 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.hpp
@@ -103,6 +107,7 @@ CMakeFiles/raytracing.dir/src/triangle.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.cpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
@@ -115,6 +120,7 @@ CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/plane.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/ray.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.hpp
+ /Users/bennatanadrien/projects/raytracing_cpu/src/texture.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.cpp

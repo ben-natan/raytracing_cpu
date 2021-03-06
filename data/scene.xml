@@ -3,11 +3,11 @@
     <Objects>
         <Spheres>
             <Sphere cx="0" cy="0.5" cz="-3" r="1" red="23" blue="222" green="22"/>
-            <Sphere cx="0" cy="0.5" cz="-1" r="0.5" red="233" blue="22" green="22" ior="1.5"/>
-            
+
+            <Sphere cx="0" cy="0.5" cz="-1" r="0.5" texture="checkers"/>
         </Spheres>
         <Planes>
-            <Plane px="0" py="-1" pz="0" nx="0" ny="1" nz="0" red="30" blue="50" green="30"/>
+            <Plane px="0" py="-1" pz="0" nx="0" ny="1" nz="0" texture="checkers"/>
         </Planes>
         <obj-files>
 

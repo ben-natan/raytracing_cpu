@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "vec3.hpp"
+#include "texture.hpp"
 #include <iostream>
 #include <algorithm>
 class Ray;
@@ -14,13 +15,15 @@ class Object {
         float _Ks;
         int _spec_n;
         float _ior; // index of refraction
-        vec3 _color;
+        Texture* _texture;
 
     public: 
         virtual ~Object() = default;
-        Object(): _k_mirror(0.8), _transparent(false), _albedo(0.18), _spec_n(3), _ior(1.5), _color(vec3(255,255,255)), _Ks(0.1) {} // albedo 0.18
-        Object(float k_mir, bool trans, float albedo = 0.18, int spec_n = 3, float ior = 1.0 /* 1.5 pour l'eau*/, vec3 color = vec3(255,255,255), float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
-        Object(float k_mir, bool trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
+        Object(): _k_mirror(0.8), _transparent(false), _albedo(0.18), _spec_n(3), _ior(1.5), _Ks(0.1), _texture(new Unicolor(vec3(255,255,255))) {}
+        Object(float k_mir, bool trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _texture(new Unicolor(color)), _Ks(Ks) {}
+        Object(float k_mir, bool trans, Texture* texture, float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks=0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _Ks(Ks) {
+            _texture = texture;
+        }
 
         virtual bool intersect(Ray* ray, float& distance, int& meshIndex) const = 0;
         virtual void getSurfaceProperties(Ray* ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const = 0;
@@ -30,8 +33,8 @@ class Object {
         // virtual void moveRight(float n) = 0;
         // virtual void moveLeft(float n) = 0;
 
-        virtual vec3 colorFromTexture(vec3 hitTextureCoords) {
-            return _color;
+        vec3 colorFromTexture(vec3 hitTextureCoords) {
+            return _texture->getColor(hitTextureCoords);
         }
 
         bool isMirror() {
@@ -40,10 +43,6 @@ class Object {
 
         bool isTransparent() {
             return _transparent;
-        }
-
-        vec3 color() {
-            return _color;
         }
 
         float k_mirror() {
