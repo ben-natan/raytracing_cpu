@@ -15,6 +15,7 @@ class Object {
         int _spec_n;
         float _ior; // index of refraction
         vec3 _color;
+
     public: 
         virtual ~Object() = default;
         Object(): _k_mirror(0.8), _transparent(false), _albedo(0.18), _spec_n(3), _ior(1.5), _color(vec3(255,255,255)), _Ks(0.1) {} // albedo 0.18

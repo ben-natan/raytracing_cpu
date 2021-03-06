@@ -1,14 +1,13 @@
 #include "triangle.hpp"
 
 bool Triangle::intersect(Ray* ray, float& distance, int& meshIndex) const {
-    const float EPSILON = 0.001;
     vec3 edge1, edge2, h, s, q;
     float a,f,u,v;
     edge1 = _v1 - _v0;
     edge2 = _v2 - _v0;
     h = ray->direction().crossProduct(edge2);
     a = edge1.dot(h);
-    if (a > -EPSILON && a < EPSILON)
+    if (a > -ray->epsilon() && a < ray->epsilon())
         return false; // rayon parallèle
     f = 1.0/a;
     s = ray->origin() - _v0;
@@ -20,7 +19,7 @@ bool Triangle::intersect(Ray* ray, float& distance, int& meshIndex) const {
     if (v < 0.0 || u + v > 1.0)
         return false;
     float t = f * edge2.dot(q);
-    if (t > EPSILON)
+    if (t > ray->epsilon())
     {
         distance = t;
         return true;
@@ -30,14 +29,13 @@ bool Triangle::intersect(Ray* ray, float& distance, int& meshIndex) const {
 }
 
 bool Triangle::intersectInMesh(Ray* ray, float& distance, vec3& uv) const {
-    const float EPSILON = 0.001;
     vec3 edge1, edge2, h, s, q;
     float a,f,u,v;
     edge1 = _v1 - _v0;
     edge2 = _v2 - _v0;
     h = ray->direction().crossProduct(edge2);
     a = edge1.dot(h);
-    if (a > -EPSILON && a < EPSILON)
+    if (a > -ray->epsilon() && a < ray->epsilon())
         return false; // rayon parallèle
     f = 1.0/a;
     s = ray->origin() - _v0;
@@ -49,7 +47,7 @@ bool Triangle::intersectInMesh(Ray* ray, float& distance, vec3& uv) const {
     if (v < 0.0 || u + v > 1.0)
         return false;
     float t = f * edge2.dot(q);
-    if (t > EPSILON)
+    if (t > ray->epsilon())
     {
         distance = t;
         uv.setx(u);

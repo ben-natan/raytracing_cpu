@@ -16,24 +16,30 @@ class Ray {
         vec3 _direction; // Doit être normalisé!
         vec3 _color;
         int _depth;
+        int _initialDepth;
+        float _epsilon; // Pour la shadow acne
+        float _ambientLevel;
 
     public:
         virtual ~Ray() = default;
 
-        Ray() : _origin(vec3(0,0,0)), _direction(vec3(0,1,0)), _color(vec3(255,255,255)), _depth(4) {}
+        Ray() : _origin(vec3(0,0,0)), _direction(vec3(0,1,0)), _color(vec3(255,255,255)), _depth(4), _initialDepth(4), _epsilon(0.001), _ambientLevel(0.005) {}
 
-        Ray(float x, float y, int width, int height, float fov, int depth = 4) { //Primary ray
+        Ray(float x, float y, int width, int height, float fov, int depth = 4, float epsilon = 0.001, float ambientLevel = 0.005) { //Primary ray
             float aspectRatio = width / (float)height; // Si width > height
             float x_camera = (2* ((x + 0.5) / width)- 1) * aspectRatio * tan(fov/2 * M_PI /180); 
             float y_camera = (1 - 2*((y + 0.5) / height)) * tan(fov/2 * M_PI/180);
             _origin = vec3(0,0,0);
             _direction = vec3(x_camera, y_camera, -1.0).normalize();
             _depth = depth;
+            _initialDepth = depth;
+            _epsilon = epsilon;
+            _ambientLevel = ambientLevel;
             _color = vec3(0,0,0);
         };
 
-        Ray(vec3 origin, vec3 direction, vec3 color, int depth = 4): 
-            _origin(origin), _direction(direction.normalize()), _color(color), _depth(depth) { } 
+        Ray(vec3 origin, vec3 direction, vec3 color, int depth, int initialDepth, float epsilon = 0.001, float ambientLevel = 0.005): 
+            _origin(origin), _direction(direction.normalize()), _color(color), _depth(depth), _initialDepth(initialDepth), _epsilon(epsilon), _ambientLevel(ambientLevel) { } 
         
         // Setters ......------------------&
         void setOrigin(vec3 origin) {
@@ -64,6 +70,10 @@ class Ray {
 
         int depth() {
             return _depth;
+        }
+
+        float epsilon() {
+            return _epsilon;
         }
 
         void addColor(vec3 color) {

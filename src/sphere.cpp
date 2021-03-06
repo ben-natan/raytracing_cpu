@@ -12,7 +12,7 @@ bool Sphere::intersect(Ray* ray, float& distance, int& meshIndex) const
         return false;
     }
     // Ici on a au moins une intersection et t1 >= t0
-    if (t0 > 0.001) {
+    if (t0 > ray->epsilon()) {
         distance = t0;
     } else {
         if (t1 < 0) {

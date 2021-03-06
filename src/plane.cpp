@@ -3,7 +3,7 @@
 bool Plane::intersect(Ray* ray, float& distance, int& meshIndex) const
 {
     float denominator = (ray->direction()).dot(_normal);
-    if (abs(denominator) > 0.0001) {
+    if (abs(denominator) > ray->epsilon()) {
         vec3 diff = _position - ray->origin();
         distance = (1/(float)denominator) *diff.dot(_normal);
         vec3 pHit = ray->origin() + distance*ray->direction();

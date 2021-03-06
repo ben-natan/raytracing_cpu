@@ -14,21 +14,16 @@
 #include <stdlib.h>
 #include <chrono>
 
-#define pano false
-
 
 int main() {
 
-    int width = 640;
-    int height = 640;
-    int antiAliasingSample = 1;
+    int depth, width, height, antiAliasingSample;
+    float epsilon, ambientLevel;
+    Tools::getConfig("../data/config.xml", depth, epsilon, width, height, antiAliasingSample, ambientLevel);
 
-    #if pano
-    width*=2;
-    height*=2
-    #endif
 
-    // // Initialiser les objets en XML;
+
+    // Initialiser les objets en XML;
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::unique_ptr<Light>> lights;
     
@@ -85,15 +80,22 @@ int main() {
                 for (int x = 0; x < height; x++) {
                     vec3 rgb;
                     double y_offset, x_offset;
-                    for (int s=0; s < antiAliasingSample; s++) {
-                        y_offset = Tools::random_double();
-                        x_offset = Tools::random_double();
-                        auto primaryRay = std::make_unique<Ray>(x /* + x_offset */, y /* + y_offset */, width, height, 90);   // fov en degrés
+                    if (antiAliasingSample > 1) {
+                        for (int s=0; s < antiAliasingSample; s++) {
+                            y_offset = Tools::random_double();
+                            x_offset = Tools::random_double();
+                            auto primaryRay = std::make_unique<Ray>(x + x_offset , y + y_offset, width, height, 90, depth, epsilon, ambientLevel);   // fov en degrés
+                            primaryRay->Shoot(objects, lights, n_obj, n_lig);
+                            rgb += primaryRay->color();
+                        }
+                        rgb = 1.0/antiAliasingSample * rgb;
+                        framebuffer[y + x * width] = rgb.gammaCorrect(); 
+                    } else {
+                        auto primaryRay = std::make_unique<Ray>(x, y, width, height, 90, depth, epsilon, ambientLevel);   // fov en degrés
                         primaryRay->Shoot(objects, lights, n_obj, n_lig);
                         rgb += primaryRay->color();
+                        framebuffer[y + x * width] = rgb.gammaCorrect(); 
                     }
-                    rgb = 1.0/antiAliasingSample * rgb;
-                    framebuffer[y + x * width] = rgb.gammaCorrect(); 
                 }
             }
         });

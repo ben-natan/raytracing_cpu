@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <depth>3</depth>
+    <epsilon>0.001</epsilon>
+    <screen-width>640</screen-width>
+    <screen-height>640</screen-height>
+    <anti-aliasing-sample>4</anti-aliasing-sample>
+    <ambient-level>0.005</ambient-level>
+</config>

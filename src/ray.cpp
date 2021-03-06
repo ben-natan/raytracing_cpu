@@ -28,20 +28,19 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
         objects[min_obj_ind]->getSurfaceProperties(this, min_distance, meshIndex, pHit, normal, hitTextureCoords);
 
         // Ambient Lighting
-        float ambientLevel = 0.005;  // EN FAIRE UN GLOBAL 
-        this->addColor(ambientLevel * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
+        this->addColor(_ambientLevel * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
 
         // Shadow rays <Lambertian + Specular Lightings>
         for (auto& light: lights) {
             bool outside = this->direction().dot(normal) < 0;
-            vec3 bias = 0.001 * pHit;
+            vec3 bias =  _epsilon * pHit;
             vec3 shadowOrigin = outside ? pHit - bias : pHit + bias;
             vec3 L = light->pos() - shadowOrigin;
             float distanceToLight = L.norm();
             float currDist;
             int vis = 1;
             L.normalize();
-            Ray *shadowRay = new Ray(shadowOrigin, L, this->color());
+            Ray *shadowRay = new Ray(shadowOrigin, L, this->color(), _initialDepth, _initialDepth);
             for ( auto& object: objects ) {
                 currDist = INFINITY;
                 if (object->intersect(shadowRay, currDist, meshIndex)) {
@@ -67,14 +66,14 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             float kr;
             objects[min_obj_ind]->fresnel(this->direction(), normal, kr);
             bool outside = this->direction().dot(normal) < 0;
-            vec3 bias = 0.0001 * normal;
+            vec3 bias = _epsilon * normal;
             vec3 newOriginRef = outside ? pHit - bias : pHit + bias;
             // vec3 newColorRef = this->color();
             vec3 newColorRef = vec3(0,0,0);
             vec3 newDirectionRef;
             if (kr < 1) {
                 if (objects[min_obj_ind]->refract(this->direction(), normal, newDirectionRef)) {
-                    auto refractionRay = std::make_unique<Ray>(Ray(newOriginRef, newDirectionRef, newColorRef, this->depth() -1));
+                    auto refractionRay = std::make_unique<Ray>(Ray(newOriginRef, newDirectionRef, newColorRef, this->depth() -1, _initialDepth));
                     refractionRay->Shoot(objects, lights, n_obj, n_lig);
                     refractionColor = refractionRay->color();
                 }
@@ -84,7 +83,7 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             vec3 newColor = vec3(0,0,0);
             vec3 newDirection;
             this->computeReflectedDirection(normal, newDirection);
-            auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));
+            auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1, _initialDepth));
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             
             // Loi de fresnel
@@ -93,20 +92,20 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
 
         // Réflexion seulement
         else if (objects[min_obj_ind]->isMirror()) {
-            vec3 bias = 0.001 * normal;
+            vec3 bias = _epsilon * normal;
             bool outside = this->direction().dot(normal) < 0;
             vec3 newOrigin = outside ? pHit + bias : pHit - bias;
             vec3 newColor = this->color();
             vec3 newDirection;
             this->computeReflectedDirection(normal, newDirection);
-            auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));
+            auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1, _initialDepth));
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
         }//(reflexion)
 
         // else if (->isTransparent()) ??
     } else {
-        if (_depth == 4) {
+        if (_depth == _initialDepth) {
             auto t = 0.5*this->direction().y() + 1.0;
             this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color?
         } else {

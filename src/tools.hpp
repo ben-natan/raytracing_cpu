@@ -11,7 +11,7 @@
 #include "sphere.hpp"
 #include "plane.hpp"
 #include "triangle.hpp"
-
+#include <chrono>
 
 class Tools {
     public:
@@ -51,7 +51,7 @@ class Tools {
             rapidxml::xml_document<> doc;
             rapidxml::xml_node<> * root_node;
 
-            std::ifstream theFile("../data/spheres.xml");
+            std::ifstream theFile(xmlfilename);
             std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
             buffer.push_back('\0');
                     
@@ -132,6 +132,65 @@ class Tools {
             std::cout << std::endl;
             std::cout << "Successfully loaded " << n_obj << " objects and " << n_lig << " lights in " << loading_time.count() << " seconds. " << std::endl;
             std::cout << std::endl;
+        }
+
+
+        static void getConfig(std::string configfilename, int& depth, float& epsilon, int& sWidth, int& sHeight, int& antiAliasingSample, float& ambientLevel) {
+            rapidxml::xml_document<> doc;
+            rapidxml::xml_node<> * root_node;
+
+            std::ifstream theFile(configfilename);
+            std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
+            buffer.push_back('\0');
+                    
+            doc.parse<0>(&buffer[0]);
+
+            root_node = doc.first_node("config");
+            rapidxml::xml_node<> * depth_node = root_node->first_node("depth");
+            rapidxml::xml_node<> * epsilon_node = root_node->first_node("epsilon");
+            rapidxml::xml_node<> * sWidth_node = root_node->first_node("screen-width");
+            rapidxml::xml_node<> * sHeight_node = root_node->first_node("screen-height");
+            rapidxml::xml_node<> * antiAliSample_node = root_node->first_node("anti-aliasing-sample");
+            rapidxml::xml_node<> * ambientLevel_node = root_node->first_node("ambient-level");
+            
+
+            if (depth_node) {
+                depth = atoi(depth_node->value());
+            } else {
+                depth = 3;
+            }
+
+            if (epsilon_node) {
+                epsilon = atof(epsilon_node->value());
+            } else {
+                epsilon = 0.001;
+            }
+
+            if (sWidth_node) {
+                sWidth = atoi(sWidth_node->value());
+            } else {
+                sWidth = 640;
+            }
+
+            if (sHeight_node) {
+                sHeight = atoi(sHeight_node->value());
+            } else {
+                sHeight = 640;
+            }
+
+            if (antiAliSample_node) {
+                antiAliasingSample = atoi(antiAliSample_node->value());
+            } else {
+                antiAliasingSample = 3;
+            }
+
+            if (ambientLevel_node) {
+                ambientLevel = atof(ambientLevel_node->value());
+            } else {
+                ambientLevel = 0.005;
+            }
+
+
         }
 };
 

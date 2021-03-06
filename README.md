@@ -13,14 +13,14 @@
 - Revoir les couleurs des lights                           -- OK
 - Directional light?                                       -- OK
 - Parser: gérer les cas sans objet                         -- OK
-- Mettre les globals dans une classe                       
+- Mettre les globals dans une classe                       -- OK
 - Essayer de faire marcher un .obj (Zeus?)                 
 - Timer                                                    -- OK
 - Bouger l'objet?
 - Faire une classe vec2?                                   - X
 - Retirer les commentaires de test
 - Problème de diffraction
-- Revoir tout le main pour bien mettre les variables
+- Revoir tout le main pour bien mettre les variables 
 - Texture sur objets de base                               
 - Config.xml
 
