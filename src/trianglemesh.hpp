@@ -139,9 +139,8 @@ class TriangleMesh : public Object {
             }
         }
 
-        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
-
-        bool intersectShadow(Ray ray, float& distance) const override;
+        bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
+        void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
 
         void moveBack(float n) override {
             for (auto& point: _P) {

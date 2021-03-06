@@ -93,8 +93,6 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/tools.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/triangle.hpp
 CMakeFiles/raytracing.dir/src/sphere.cpp.o: ../src/vec3.hpp
 
-CMakeFiles/raytracing.dir/src/test.cpp.o: ../src/test.cpp
-
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../include/rapidxml.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/light.hpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/object.hpp

@@ -9,53 +9,54 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             return;
     }
     int min_obj_ind;
+    int meshIndex;
     float distance;
     float min_distance = INFINITY;
-    vec3 pHit, normal, hitTextureCoords;
-    vec3 min_pHit, min_normal, min_hitTextureCoords;
+   
     for (int i = 0; i < n_obj; i++) {
         distance = INFINITY;
-        if (objects[i]->intersect(this, distance, pHit, normal, hitTextureCoords)) {
+        if (objects[i]->intersect(this, distance, meshIndex)) {
             if (distance < min_distance) {
                     min_distance = distance;
                     min_obj_ind = i;
-                    min_pHit = pHit;
-                    min_normal = normal;
-                    min_hitTextureCoords = hitTextureCoords;
             }
         }
     }
+    
     if (min_distance != INFINITY) {
+        vec3 pHit, normal, hitTextureCoords;
+        objects[min_obj_ind]->getSurfaceProperties(this, min_distance, meshIndex, pHit, normal, hitTextureCoords);
+
         // Ambient Lighting
         float ambientLevel = 0.05;  // EN FAIRE UN GLOBAL 
-        this->addColor(ambientLevel * objects[min_obj_ind]->color());
+        if (_depth == 4) this->addColor(ambientLevel * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
 
         // Shadow rays <Lambertian + Specular Lightings>
         for (auto& light: lights) {
-            vec3 bias = 0.001 * min_normal;
-            vec3 shadowOrigin = min_pHit + bias;
+            bool outside = this->direction().dot(normal) < 0;
+            vec3 bias = 0.001 * pHit;
+            vec3 shadowOrigin = outside ? pHit - bias : pHit + bias;
             vec3 L = light->pos() - shadowOrigin;
             float distanceToLight = L.norm();
             float currDist;
             int vis = 1;
             L.normalize();
-            Ray shadowRay(shadowOrigin, L, this->color());
+            Ray *shadowRay = new Ray(shadowOrigin, L, this->color());
             for ( auto& object: objects ) {
                 currDist = INFINITY;
-                if (object->intersectShadow(shadowRay, currDist)) {
+                if (object->intersect(shadowRay, currDist, meshIndex)) {
                     if (currDist < distanceToLight) {
                         vis = 0;
                         break; // sort de la boucle sur les objets avec vis = 0;
                     }
                 }
             }
-
             // Lambertian 
-            this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)min_normal.dot(L)) * objects[min_obj_ind]->colorFromTexture(min_hitTextureCoords));
+            this->addColor(vis * objects[min_obj_ind]->albedo() / M_PI * light->intensity() * std::max(0.0f, (float)normal.dot(L)) * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
             
-            // Specular
+            // // Specular
             vec3 R;
-            shadowRay.computeReflectedDirection(min_normal,R);
+            shadowRay->computeReflectedDirection(normal,R);
             this->addColor(vis * objects[min_obj_ind]->Ks() * light->intensity() * std::pow(std::max(0.0f, R.dot(this->direction())), objects[min_obj_ind]->spec_n()) * light->color());
         }//(shadow & illumination)
 
@@ -64,25 +65,25 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
         if (objects[min_obj_ind]->isMirror() && objects[min_obj_ind]->isTransparent()) {
             vec3 refractionColor = vec3(0,0,0);
             float kr;
-            objects[min_obj_ind]->fresnel(this->direction(), min_normal, kr);
-            bool outside = this->direction().dot(min_normal) < 0;
-            vec3 bias = 0.0001 * min_normal;
-            vec3 newOriginRef = outside ? min_pHit - bias : min_pHit + bias;
+            objects[min_obj_ind]->fresnel(this->direction(), normal, kr);
+            bool outside = this->direction().dot(normal) < 0;
+            vec3 bias = 0.0001 * normal;
+            vec3 newOriginRef = outside ? pHit - bias : pHit + bias;
             // vec3 newColorRef = this->color();
             vec3 newColorRef = vec3(0,0,0);
             vec3 newDirectionRef;
             if (kr < 1) {
-                if (objects[min_obj_ind]->refract(this->direction(), min_normal, newDirectionRef)) {
+                if (objects[min_obj_ind]->refract(this->direction(), normal, newDirectionRef)) {
                     auto refractionRay = std::make_unique<Ray>(Ray(newOriginRef, newDirectionRef, newColorRef, this->depth() -1));
                     refractionRay->Shoot(objects, lights, n_obj, n_lig);
                     refractionColor = refractionRay->color();
                 }
             }
-            vec3 newOrigin = outside ? min_pHit + bias : min_pHit - bias;
+            vec3 newOrigin = outside ? pHit + bias : pHit - bias;
             // vec3 newColor = this->color();
             vec3 newColor = vec3(0,0,0);
             vec3 newDirection;
-            this->computeReflectedDirection(min_normal, newDirection);
+            this->computeReflectedDirection(normal, newDirection);
             auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             
@@ -92,12 +93,12 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
 
         // Réflexion seulement
         else if (objects[min_obj_ind]->isMirror()) {
-            vec3 bias = 0.001 * min_normal;
-            bool outside = this->direction().dot(min_normal) < 0;
-            vec3 newOrigin = outside ? min_pHit + bias : min_pHit - bias;
+            vec3 bias = 0.001 * normal;
+            bool outside = this->direction().dot(normal) < 0;
+            vec3 newOrigin = outside ? pHit + bias : pHit - bias;
             vec3 newColor = this->color();
             vec3 newDirection;
-            this->computeReflectedDirection(min_normal, newDirection);
+            this->computeReflectedDirection(normal, newDirection);
             auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1));
             mirrorRay->Shoot(objects, lights, n_obj, n_lig);
             this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());

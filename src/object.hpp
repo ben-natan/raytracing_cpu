@@ -21,8 +21,8 @@ class Object {
         Object(float k_mir, bool trans, float albedo = 0.18, int spec_n = 3, float ior = 1.0 /* 1.5 pour l'eau*/, vec3 color = vec3(255,255,255), float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
         Object(float k_mir, bool trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _color(color), _Ks(Ks) {}
 
-        virtual bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const = 0;
-        virtual bool intersectShadow(Ray ray, float& distance) const = 0;
+        virtual bool intersect(Ray* ray, float& distance, int& meshIndex) const = 0;
+        virtual void getSurfaceProperties(Ray* ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const = 0;
 
         virtual void moveBack(float n) = 0;
         // virtual void moveTowards(float n) = 0;

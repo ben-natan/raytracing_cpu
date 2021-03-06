@@ -93,8 +93,6 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.o
  /Users/bennatanadrien/projects/raytracing_cpu/src/tools.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/vec3.hpp
-CMakeFiles/raytracing.dir/src/test.cpp.o
- /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp
 CMakeFiles/raytracing.dir/src/triangle.cpp.o
  ../include/rapidxml.hpp
  /Users/bennatanadrien/projects/raytracing_cpu/src/light.hpp

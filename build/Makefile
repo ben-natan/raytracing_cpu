@@ -251,33 +251,6 @@ src/sphere.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/sphere.cpp.s
 .PHONY : src/sphere.cpp.s
 
-src/test.o: src/test.cpp.o
-
-.PHONY : src/test.o
-
-# target to build an object file
-src/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/test.cpp.o
-.PHONY : src/test.cpp.o
-
-src/test.i: src/test.cpp.i
-
-.PHONY : src/test.i
-
-# target to preprocess a source file
-src/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/test.cpp.i
-.PHONY : src/test.cpp.i
-
-src/test.s: src/test.cpp.s
-
-.PHONY : src/test.s
-
-# target to generate assembly for a file
-src/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/raytracing.dir/build.make CMakeFiles/raytracing.dir/src/test.cpp.s
-.PHONY : src/test.cpp.s
-
 src/triangle.o: src/triangle.cpp.o
 
 .PHONY : src/triangle.o
@@ -353,9 +326,6 @@ help:
 	@echo "... src/sphere.o"
 	@echo "... src/sphere.i"
 	@echo "... src/sphere.s"
-	@echo "... src/test.o"
-	@echo "... src/test.i"
-	@echo "... src/test.s"
 	@echo "... src/triangle.o"
 	@echo "... src/triangle.i"
 	@echo "... src/triangle.s"

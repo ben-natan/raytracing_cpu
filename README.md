@@ -9,7 +9,7 @@
 - Utiliser N et st dans l'algo                             -- OK
 - Clairement définir la transparence etc                   -- OK ( faire le cas seulement refrac )
 - Destructeurs                                             -- OK
-- Optimiser (changer en pointeurs? etc)                    
+- Optimiser (changer en pointeurs? etc)                    -- OK
 - Revoir les couleurs des lights                           -- OK
 - Directional light?                                       -- OK
 - Parser: gérer les cas sans objet                         -- OK
@@ -21,7 +21,7 @@
 - Retirer les commentaires de test
 - Problème de diffraction
 - Revoir tout le main pour bien mettre les variables
-- Texture sur objets de base
+- Texture sur objets de base                               
 
 
 

@@ -19,8 +19,8 @@
 
 int main() {
 
-    int width = 320;
-    int height = 320;
+    int width = 640;
+    int height = 640;
     int antiAliasingSample = 1;
 
     #if pano

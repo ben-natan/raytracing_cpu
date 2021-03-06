@@ -23,11 +23,11 @@ class Triangle: public Object {
                                                                             _st0(st0), _st1(st1), _st2(st2) {}
 
 
-        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
+        bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
 
         bool intersectInMesh(Ray* ray, float& distance, vec3& uv) const;
 
-        bool intersectShadow(Ray ray, float& distance) const override;
+        void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
 
         void moveBack(float n) override {
             _v0+=vec3(0,0,-n);

@@ -19,12 +19,9 @@ class Plane: public Object {
         Plane(vec3 pos, vec3 nor): Object(0.8,false,0.18), _position(pos), _normal(nor.normalize()) {};
         Plane(vec3 pos, vec3 nor, vec3 color): Object(0.8,false,0.18), _position(pos), _normal(nor.normalize()) {};
 
-        ~Plane() {
-            
-        }
-
-        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
-        bool intersectShadow(Ray ray, float& distance) const override;
+        bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
+        void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
+        
         void moveBack(float n) override {
             return;
         }

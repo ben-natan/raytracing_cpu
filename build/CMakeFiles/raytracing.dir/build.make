@@ -129,22 +129,9 @@ CMakeFiles/raytracing.dir/src/sphere.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/sphere.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/sphere.cpp -o CMakeFiles/raytracing.dir/src/sphere.cpp.s
 
-CMakeFiles/raytracing.dir/src/test.cpp.o: CMakeFiles/raytracing.dir/flags.make
-CMakeFiles/raytracing.dir/src/test.cpp.o: ../src/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/raytracing.dir/src/test.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/test.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp
-
-CMakeFiles/raytracing.dir/src/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracing.dir/src/test.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp > CMakeFiles/raytracing.dir/src/test.cpp.i
-
-CMakeFiles/raytracing.dir/src/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracing.dir/src/test.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/bennatanadrien/projects/raytracing_cpu/src/test.cpp -o CMakeFiles/raytracing.dir/src/test.cpp.s
-
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: CMakeFiles/raytracing.dir/flags.make
 CMakeFiles/raytracing.dir/src/triangle.cpp.o: ../src/triangle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/raytracing.dir/src/triangle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/raytracing.dir/src/triangle.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/triangle.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/triangle.cpp
 
 CMakeFiles/raytracing.dir/src/triangle.cpp.i: cmake_force
@@ -157,7 +144,7 @@ CMakeFiles/raytracing.dir/src/triangle.cpp.s: cmake_force
 
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: CMakeFiles/raytracing.dir/flags.make
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o: ../src/trianglemesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o -c /Users/bennatanadrien/projects/raytracing_cpu/src/trianglemesh.cpp
 
 CMakeFiles/raytracing.dir/src/trianglemesh.cpp.i: cmake_force
@@ -174,7 +161,6 @@ raytracing_OBJECTS = \
 "CMakeFiles/raytracing.dir/src/plane.cpp.o" \
 "CMakeFiles/raytracing.dir/src/ray.cpp.o" \
 "CMakeFiles/raytracing.dir/src/sphere.cpp.o" \
-"CMakeFiles/raytracing.dir/src/test.cpp.o" \
 "CMakeFiles/raytracing.dir/src/triangle.cpp.o" \
 "CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o"
 
@@ -185,12 +171,11 @@ raytracing: CMakeFiles/raytracing.dir/src/main.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/plane.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/ray.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/sphere.cpp.o
-raytracing: CMakeFiles/raytracing.dir/src/test.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/triangle.cpp.o
 raytracing: CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o
 raytracing: CMakeFiles/raytracing.dir/build.make
 raytracing: CMakeFiles/raytracing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable raytracing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bennatanadrien/projects/raytracing_cpu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable raytracing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raytracing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

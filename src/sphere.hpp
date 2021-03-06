@@ -37,12 +37,19 @@ class Sphere : public Object {
             _radius = radius;
         }
 
-        bool intersect(Ray* ray, float& distance, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
-        bool intersectShadow(Ray ray, float& distance) const override;
+        bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
+        void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
 
         void moveBack(float n) override {
             _center+=vec3(0,0,-n);
         }
+
+        // vec3 colorFromTexture(vec3 hitTextureCoords) override {
+        //     // Ici on fait un damier
+        //     int M = 10;
+        //     float checker = (fmod(hitTextureCoords.x() * M, 1.0) > 0.5) ^ (fmod(hitTextureCoords.y() * M, 1.0) < 0.5);
+        //     return checker ? vec3(0,0,0) : vec3(255,255,255);
+        // }
     
 };
 

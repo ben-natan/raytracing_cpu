@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/raytracing.dir/src/plane.cpp.o"
   "CMakeFiles/raytracing.dir/src/ray.cpp.o"
   "CMakeFiles/raytracing.dir/src/sphere.cpp.o"
-  "CMakeFiles/raytracing.dir/src/test.cpp.o"
   "CMakeFiles/raytracing.dir/src/triangle.cpp.o"
   "CMakeFiles/raytracing.dir/src/trianglemesh.cpp.o"
   "raytracing"
