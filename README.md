@@ -22,7 +22,7 @@
 - Problème de diffraction
 - Revoir tout le main pour bien mettre les variables
 - Texture sur objets de base                               
-
+- Config.xml
 
 
 ## Transparence.

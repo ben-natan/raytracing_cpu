@@ -12,6 +12,7 @@
     <Lights>
         <PointLights>
             <PointLight px="-6" py="1" pz="-3"/>
+            <PointLight px="-1" py="1" pz="2"/>
         </PointLights>
     </Lights>
 </World>

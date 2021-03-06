@@ -94,7 +94,6 @@ class TriangleMesh : public Object {
                     double x,y,z;
                     v>>x;v>>y;v>>z;
                     vert = vec3(x,y,z);
-                    std::cout << vert << std::endl;
                     _P.push_back(vert);
                 }
                 else if (line.substr(0,2) == "vt") {
@@ -103,7 +102,6 @@ class TriangleMesh : public Object {
                     double U,V;
                     v >> U; v >> V;
                     tex = vec3(U,V,0);
-                    std::cout << "Texxx: " << tex << std::endl;
                     _texCoordinates.push_back(tex);
                 }
                 else if (line.substr(0,2) == "vn") {
@@ -112,12 +110,10 @@ class TriangleMesh : public Object {
                     double x,y,z;
                     v >> x; v>> y; v>>z;
                     nor = vec3(x,y,z);
-                    std::cout << "Norrr:: " << nor << std::endl;
                     _N.push_back(nor);
                 }
                 else if (line.substr(0,2)=="f ") {
                     _numTris += 1;
-                    std::cout << _numTris << std::endl;
                     int a,b,c; //mesh index
                     int p,q,r; //texture index
                     int x,y,z; //norm index

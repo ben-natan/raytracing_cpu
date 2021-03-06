@@ -28,8 +28,8 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
         objects[min_obj_ind]->getSurfaceProperties(this, min_distance, meshIndex, pHit, normal, hitTextureCoords);
 
         // Ambient Lighting
-        float ambientLevel = 0.05;  // EN FAIRE UN GLOBAL 
-        if (_depth == 4) this->addColor(ambientLevel * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
+        float ambientLevel = 0.005;  // EN FAIRE UN GLOBAL 
+        this->addColor(ambientLevel * objects[min_obj_ind]->colorFromTexture(hitTextureCoords));
 
         // Shadow rays <Lambertian + Specular Lightings>
         for (auto& light: lights) {

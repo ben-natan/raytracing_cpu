@@ -36,11 +36,12 @@ int main() {
 
     Tools::parseObjectsAndLights("../data/spheres.xml", objects, lights, n_obj, n_lig);
 
-    objects.emplace_back(std::make_unique<TriangleMesh>("../data/cube.obj"));
+    objects.emplace_back(std::make_unique<TriangleMesh>("../data/cube3.obj"));
+    // objects[0]->moveBack(3);
     n_obj++;
 
 
-    // TriangleMesh *mesh = TriangleMesh::generatePolySphere(vec3(0,0,-1),1, 10);
+    // TriangleMesh *mesh = TriangleMesh::generatePolySphere(vec3(0,1,-3),1, 20);
     // objects.push_back(std::unique_ptr<Object>(mesh));
     // objects[0]->moveBack(1);
     // n_obj++;
@@ -85,7 +86,6 @@ int main() {
                     vec3 rgb;
                     double y_offset, x_offset;
                     for (int s=0; s < antiAliasingSample; s++) {
-                        // std::cout << "Pixel: " << x << ", " << y << std::endl;
                         y_offset = Tools::random_double();
                         x_offset = Tools::random_double();
                         auto primaryRay = std::make_unique<Ray>(x /* + x_offset */, y /* + y_offset */, width, height, 90);   // fov en degrés
