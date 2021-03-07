@@ -12,7 +12,6 @@ class Triangle: public Object {
         vec3 _v1;
         vec3 _v2;
 
-        
 
     public:
         Triangle(): Object(), _v0(vec3(0,0,0)), _v1(vec3(0,0,0)), _v2(vec3(0,0,0)) {}

@@ -70,7 +70,7 @@ class Tools {
                 rapidxml::xml_node<> * spheres_root = objects_root->first_node("Spheres");
                 if (spheres_root) {
                     for (rapidxml::xml_node<> * sphere = spheres_root->first_node("Sphere"); sphere; sphere = sphere->next_sibling()) {
-                        std::cout << "Loading sphere" << " " << n_obj << ".." << std::endl;
+                        std::cout << "Loading object" << " " << n_obj + 1 << " : Sphere.." << std::endl;
                         float cx, cy, cz, r;
                         int red, green, blue;
                         char* texture;
@@ -119,7 +119,7 @@ class Tools {
                 rapidxml::xml_node<> * planes_root = objects_root->first_node("Planes");
                 if (planes_root) {
                     for (rapidxml::xml_node<> * plane = planes_root->first_node("Plane"); plane; plane = plane->next_sibling()) {
-                        std::cout << "Loading plane" << " " << n_obj << ".." << std::endl;
+                        std::cout << "Loading object" << " " << n_obj + 1 << " : Plane.." << std::endl;
                         float px, py, pz;
                         float nx, ny, nz;
                         int red, green, blue;
@@ -168,6 +168,7 @@ class Tools {
                 rapidxml::xml_node<> * objFiles_root = objects_root->first_node("obj-files");
                 if (objFiles_root) {
                     for (rapidxml::xml_node<> * objFile = objFiles_root->first_node("obj-file"); objFile; objFile = objFile->next_sibling()) {
+                        std::cout << "Loading object" << " " << n_obj + 1 << " from obj file.." << std::endl;
                         objects.emplace_back(std::make_unique<TriangleMesh>(objFile->value()));
                         n_obj++;
                     }
@@ -178,6 +179,7 @@ class Tools {
                     rapidxml::xml_node<> * sphereMeshes_root = proceduralMeshes_root->first_node("Sphere-meshes");
                     if (sphereMeshes_root) {
                         for (rapidxml::xml_node<> * sphereMesh = sphereMeshes_root->first_node("Mesh"); sphereMesh; sphereMesh = sphereMesh->next_sibling()) {
+                            std::cout << "Loading object" << " " << n_obj + 1 << " : Procedural Sphere.." << std::endl;
                             float cx, cy, cz, r;
                             int divs;
                             cx = atof(sphereMesh->first_attribute("cx")->value());
@@ -198,7 +200,7 @@ class Tools {
                 rapidxml::xml_node<> * pLights_root = lights_root->first_node("PointLights");
                 if (pLights_root) {
                     for (rapidxml::xml_node<> * light = pLights_root->first_node("PointLight"); light; light = light->next_sibling()) {
-                        std::cout << "Loading pointLight" << " " << n_lig << ".." << std::endl;
+                        std::cout << "Loading light" << " " << n_lig + 1 << " : Point Light.." << std::endl;
                         float px, py, pz;
                         px = atof(light->first_attribute("px")->value());
                         py = atof(light->first_attribute("py")->value());
@@ -211,7 +213,7 @@ class Tools {
                 rapidxml::xml_node<> * dirLights_root = lights_root->first_node("DirectionalLights");
                 if (dirLights_root) {
                     for (rapidxml::xml_node<> * light = dirLights_root->first_node("DirectionalLight"); light; light = light->next_sibling()) {
-                        std::cout << "Loading directionalLight " << n_lig << ".." << std::endl;
+                        std::cout << "Loading light " << n_lig + 1 << " : Directional Light.." << std::endl;
                         float dx, dy, dz;
                         dx = atof(light->first_attribute("dx")->value());
                         dy = atof(light->first_attribute("dx")->value());
