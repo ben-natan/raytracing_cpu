@@ -43,7 +43,6 @@ int main() {
         return 2;
     }
 
-    // We create a renderer with hardware acceleration, we also present according with the vertical sync refresh.
     SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC) ;
 
     bool quit = false;

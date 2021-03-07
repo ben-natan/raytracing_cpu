@@ -34,7 +34,7 @@ class PointLight: public Light {
     private:
         vec3 _pos;
     public:
-        PointLight(const vec3 &pos, const vec3 &color = vec3(255,255,255), const float &intensity = 3.0):
+        PointLight(const vec3 &pos, const vec3 &color = vec3(255,255,255), const float &intensity = 1.0):
                 Light(),
                 _pos(pos)
                 {

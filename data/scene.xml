@@ -2,12 +2,15 @@
 <World>
     <Objects>
         <Spheres>
-            <Sphere cx="0" cy="0.5" cz="-3" r="1" red="23" blue="222" green="22"/>
-
-            <Sphere cx="0" cy="0.5" cz="-1" r="0.5" texture="checkers"/>
+            <Sphere cx="0.3" cy="-0.2" cz="-4" r="0.5" red="255" green="255" blue="0"></Sphere>
+            <Sphere cx="-0.7" cy="-0.5" cz="-1.7" r="0.5" red="200" green="10" blue="70" ior="1.5"></Sphere>
+            <Sphere cx="0.3" cy="-0.6" cz="-1.7" r="0.3" red="10" green="10" blue="170" ior="1.5"></Sphere>
+            <Sphere cx="0" cy="-0.8" cz="-1.4" r="0.2" texture="checkers"></Sphere>
+            <Sphere cx="-1.2" cy="0" cz="-5" r="1" red="0" green="102" blue="255"></Sphere>
+            <Sphere cx="0.2" cy="-0.4" cz="-2.5" r="0.5" red="255" green="0" blue="0" ior="1.0"></Sphere>
         </Spheres>
         <Planes>
-            <Plane px="0" py="-1" pz="0" nx="0" ny="1" nz="0" texture="checkers"/>
+            <Plane px="0" py="-1" pz="0" nx="0" ny="1" nz="0" red="10" green="30" blue="10" texture="checkers"/>
         </Planes>
         <obj-files>
 
@@ -20,8 +23,8 @@
     </Objects>
     <Lights>
         <PointLights>
-            <PointLight px="-6" py="1" pz="-3"/>
-            <PointLight px="-1" py="1" pz="2"/>
+            <PointLight px="0" py="1" pz="3"/>
+            <PointLight px="0.5" py="6" pz="-3"/>
         </PointLights>
     </Lights>
 </World>

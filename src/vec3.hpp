@@ -113,10 +113,6 @@ class vec3 {
         }
 
         void clampColor(int samples) {
-            // auto scale = 1.0/samples;
-            // _x = 256 * std::clamp(_x*scale, 0.0, 0.999); 
-            // _y = 256 * std::clamp(_y*scale, 0.0, 0.999); 
-            // _z = 256 * std::clamp(_z*scale, 0.0, 0.999); 
             _x = _x/samples;
             _y = _y/samples;
             _z = _z/samples;

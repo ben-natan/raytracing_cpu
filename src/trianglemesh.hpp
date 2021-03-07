@@ -8,6 +8,7 @@
 #include <sstream>
 
 class Ray;
+class Texture;
 
 class TriangleMesh : public Object {
     protected:
@@ -29,7 +30,7 @@ class TriangleMesh : public Object {
         TriangleMesh(int nfaces, std::vector<int> faceIndex, 
                      std::vector<int> vertsIndex, std::vector<vec3> verts,
                      std::vector<int> norIndex, std::vector<vec3> N, 
-                     std::vector<int> texIndex, std::vector<vec3> texCoordinates) : Object(0.8,false,vec3(20,0,20)), _numTris(0) 
+                     std::vector<int> texIndex, std::vector<vec3> texCoordinates) : Object(0.3,false,new CheckersTexture()), _numTris(0) 
             {
                     
                 int k=0, maxVertIndex=0;
@@ -80,7 +81,7 @@ class TriangleMesh : public Object {
 
             }
 
-        TriangleMesh(const char* filename): Object(0.80,false,vec3(20,0,20)), _numTris(0) {
+        TriangleMesh(const char* filename): Object(0.3,false,new CheckersTexture()), _numTris(0) {
             std::ifstream in(filename, std::ios::in);
             if (!in) {
                 std::cerr << "Failed to open file" << std::endl;

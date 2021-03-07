@@ -68,8 +68,7 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             bool outside = this->direction().dot(normal) < 0;
             vec3 bias = _epsilon * normal;
             vec3 newOriginRef = outside ? pHit - bias : pHit + bias;
-            // vec3 newColorRef = this->color();
-            vec3 newColorRef = vec3(0,0,0);
+            vec3 newColorRef = this->color();
             vec3 newDirectionRef;
             if (kr < 1) {
                 if (objects[min_obj_ind]->refract(this->direction(), normal, newDirectionRef)) {
@@ -79,8 +78,7 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
                 }
             }
             vec3 newOrigin = outside ? pHit + bias : pHit - bias;
-            // vec3 newColor = this->color();
-            vec3 newColor = vec3(0,0,0);
+            vec3 newColor = this->color();
             vec3 newDirection;
             this->computeReflectedDirection(normal, newDirection);
             auto mirrorRay = std::make_unique<Ray>(Ray(newOrigin, newDirection, newColor, this->depth() -1, _initialDepth));
@@ -103,11 +101,10 @@ void Ray::Shoot(std::vector<std::unique_ptr<Object>>& objects, std::vector<std::
             this->addColor(objects[min_obj_ind]->k_mirror() * mirrorRay->color());
         }//(reflexion)
 
-        // else if (->isTransparent()) ??
     } else {
         if (_depth == _initialDepth) {
             auto t = 0.5*this->direction().y() + 1.0;
-            this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color?
+            this->addColor((1.0-t)*vec3(255,255,255) + t*vec3(128,179,255)); // Background color
         } else {
             this->addColor(vec3(0,0,0));
         }

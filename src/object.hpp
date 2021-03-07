@@ -19,9 +19,9 @@ class Object {
 
     public: 
         virtual ~Object() = default;
-        Object(): _k_mirror(0.8), _transparent(false), _albedo(0.18), _spec_n(3), _ior(1.5), _Ks(0.1), _texture(new Unicolor(vec3(255,255,255))) {}
-        Object(float k_mir, bool trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _texture(new Unicolor(color)), _Ks(Ks) {}
-        Object(float k_mir, bool trans, Texture* texture, float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks=0.1): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _Ks(Ks) {
+        Object(): _k_mirror(0.8), _transparent(false), _albedo(0.18), _spec_n(3), _ior(1.5), _Ks(0.05), _texture(new Unicolor(vec3(255,255,255))) {}
+        Object(float k_mir, bool trans, vec3 color = vec3(255,255,255), float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks = 0.05): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _texture(new Unicolor(color)), _Ks(Ks) {}
+        Object(float k_mir, bool trans, Texture* texture, float albedo = 0.18, int spec_n = 3, float ior = 1.5, float Ks=0.05): _k_mirror(k_mir), _transparent(trans), _albedo(albedo), _spec_n(spec_n), _ior(ior), _Ks(Ks) {
             _texture = texture;
         }
 

@@ -18,9 +18,6 @@ class Triangle: public Object {
         Triangle(vec3 v0, vec3 v1, vec3 v2): Object(), _v0(v0), _v1(v1), _v2(v2) {}
 
         bool intersect(Ray* ray, float& distance, int& meshIndex) const override;
-
-        bool intersectInMesh(Ray* ray, float& distance, vec3& uv) const;
-
         void getSurfaceProperties(Ray *ray, float distance, int meshIndex, vec3& pHit, vec3& normal, vec3& hitTextureCoords) const override;
 
         void moveBack(float n) override {
